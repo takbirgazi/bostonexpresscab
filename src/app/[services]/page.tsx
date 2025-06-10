@@ -16,7 +16,7 @@ const ServiceClient = () => {
     const [pageHeading, setPageHeading] = useState("");
     const [data, setData] = useState({
         title: "",
-        description: ""
+        description: "",
     });
 
     const pageHeaderData = {
