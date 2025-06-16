@@ -93,7 +93,7 @@ export default function BlogPage() {
     const formattedDate = new Date(blog.created_at).toLocaleDateString();
     const pageHeaderData = {
         heading: blog.title,
-        bgImage: `https://maamun.xyz/boston/public/${blog.photo}`,
+        bgImage: `https://bostonexpresscab.com/boston/public/${blog.photo}`,
     };
 
     return (
@@ -109,7 +109,7 @@ export default function BlogPage() {
                     {blog.photo && (
                         <div className="relative w-full min-h-80 mb-6 rounded-md overflow-hidden">
                             <Image
-                                src={`https://maamun.xyz/boston/public/${blog.photo}`}
+                                src={`https://bostonexpresscab.com/boston/public/${blog.photo}`}
                                 alt={blog.title}
                                 fill
                                 className="object-cover"
