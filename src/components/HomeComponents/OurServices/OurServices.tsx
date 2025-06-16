@@ -1,10 +1,10 @@
 
 import Image from 'next/image';
 import SectionHeader from "@/components/SharedComponent/SectionHeader/SectionHeader";
-import carServices_1 from "@/assets/images/cars/carServices_1.webp";
-import carServices_2 from "@/assets/images/cars/carServices_2.webp";
-import carServices_3 from "@/assets/images/cars/carServices_3.webp";
-import carServices_4 from "@/assets/images/cars/carServices_4.webp";
+import carServices_1 from "@/assets/images/cars/carServices_1.jpg";
+import carServices_2 from "@/assets/images/cars/carServices_2.jpg";
+import carServices_3 from "@/assets/images/cars/carServices_3.jpg";
+import carServices_4 from "@/assets/images/cars/carServices_4.jpg";
 
 
 

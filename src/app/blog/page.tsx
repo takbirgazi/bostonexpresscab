@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import BlogCard from '@/components/BlogComponents/BlogCard/BlogCard';
 import PageHeader from '@/components/SharedComponent/PageHeader/PageHeader';
-import pageHeaderBg from "@/assets/images/pageHeadearBg.webp";
+import pageHeaderBg from "@/assets/images/pageHeadearBg.jpg";
 
 
 interface BlogPostProps {

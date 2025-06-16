@@ -1,9 +1,9 @@
 
 import ChargeItem from "../ChargeItem/ChargeItem";
 import Image from "next/image";
-import car_1 from "@/assets/images/cars/car_1.webp";
-import car_2 from "@/assets/images/cars/car_2.webp";
-import car_3 from "@/assets/images/cars/car_3.webp";
+import car_1 from "@/assets/images/cars/car_1.jpg";
+import car_2 from "@/assets/images/cars/car_2.jpg";
+import car_3 from "@/assets/images/cars/car_3.jpg";
 import { BookingTypes } from "../BookingTypes";
 
 interface Charge {

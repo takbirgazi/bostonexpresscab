@@ -1,6 +1,6 @@
 import Image from "next/image";
-import car_1 from "@/assets/images/cars/car_1.webp";
-import reviewImage from "@/assets/images/review.webp";
+import car_1 from "@/assets/images/cars/car_1.jpg";
+import reviewImage from "@/assets/images/review.jpg";
 
 const HomeContent = () => {
     return (

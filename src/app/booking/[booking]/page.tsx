@@ -13,12 +13,12 @@ import {
   FaPhone,
   FaEnvelope,
 } from 'react-icons/fa';
-import car_1 from "@/assets/images/cars/car_1.webp";
-import car_2 from "@/assets/images/cars/car_2.webp";
-import car_3 from "@/assets/images/cars/car_3.webp";
-import car_4 from "@/assets/images/cars/car_4.webp";
-import car_5 from "@/assets/images/cars/car_5.webp";
-import car_6 from "@/assets/images/cars/car_6.webp";
+import car_1 from "@/assets/images/cars/car_1.jpg";
+import car_2 from "@/assets/images/cars/car_2.jpg";
+import car_3 from "@/assets/images/cars/car_3.jpg";
+import car_4 from "@/assets/images/cars/car_4.jpg";
+import car_5 from "@/assets/images/cars/car_5.jpg";
+import car_6 from "@/assets/images/cars/car_6.jpg";
 
 
 export default function BookingSummaryPage() {
