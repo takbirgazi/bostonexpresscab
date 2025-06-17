@@ -92,8 +92,9 @@ export default function BlogPage() {
 
     const formattedDate = new Date(blog.created_at).toLocaleDateString();
     const pageHeaderData = {
-        heading: blog.title,
-        bgImage: `https://bostonexpresscab.com/boston/public/${blog.photo}`,
+        // heading: blog.title,
+        heading: '',
+        bgImage: `https://admin.bostonexpresscab.com/${blog.photo}`,
     };
 
     return (
@@ -109,11 +110,11 @@ export default function BlogPage() {
                     {blog.photo && (
                         <div className="relative w-full min-h-80 mb-6 rounded-md overflow-hidden">
                             <Image
-                                src={`https://bostonexpresscab.com/boston/public/${blog.photo}`}
+                                src={`https://admin.bostonexpresscab.com/${blog.photo}`}
                                 alt={blog.title}
-                                fill
+                                width={1250}
+                                height={400}
                                 className="object-cover"
-                                priority
                             />
                         </div>
                     )}
