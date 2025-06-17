@@ -4,7 +4,6 @@ import { BookingTypes } from '@/components/BookingComponents/BookingTypes';
 import Charges from '@/components/BookingComponents/Charges/Charges';
 import TripSummary from '@/components/BookingComponents/TripSummary/TripSummary';
 import RentsCard from '@/components/HomeComponents/Rents/RentsCard/RentsCard';
-import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import {
@@ -19,12 +18,13 @@ import car_3 from "@/assets/images/cars/car_3.jpg";
 import car_4 from "@/assets/images/cars/car_4.jpg";
 import car_5 from "@/assets/images/cars/car_5.jpg";
 import car_6 from "@/assets/images/cars/car_6.jpg";
+import { useAppSelector } from '@/lib/hooks';
 
 
 export default function BookingSummaryPage() {
+  const fromData = useAppSelector(state => state.formData);
   const [isTraveler, setIsTraveler] = useState(true);
-  const path = usePathname();
-  const route = path.split("/")[2];
+  const route = fromData.usrId;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingData, setBookingData] = useState<BookingTypes>({
     uuid: '',
