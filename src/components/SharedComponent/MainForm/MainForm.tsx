@@ -15,28 +15,9 @@ import LocationSearch from "./LocationSearch/LocationSearch";
 import { calculateDistance } from "@/app/utils/calculateDistance";
 import { useAppDispatch } from "@/lib/hooks";
 import { setFrom } from "@/lib/features/formdata/formdataSlice";
+import { AirportList, Inputs, PlaceSelectHandler } from "./MainFromTypes";
 
-type Inputs = {
-    date: string;
-    time: string;
-    luggage: number;
-    passengers: number;
-    children: number;
-    childSeats: number;
-    pickup: string;
-    pickupInp: string;
-    dropoff: string;
-    dropoffInp: string;
-};
 
-interface PlaceSelectHandler {
-    (placeId: string, description: string): void;
-}
-interface AirportList {
-    id: number,
-    place_id: string,
-    name: string
-}
 const MainForm = () => {
     const router = useRouter();
     const [selectedVehicle, setSelectedVehicle] = useState(1); // Default to From Airport (id: 1)
@@ -99,7 +80,7 @@ const MainForm = () => {
             passengers: 1,
             children: 0,
             childSeats: 0,
-            luggage: 0
+            luggage: 0,
         }
     });
 
@@ -123,6 +104,7 @@ const MainForm = () => {
                             place_id: airport.place_id,
                             name: airport.name
                         }))
+                        .sort((a, b) => b.id - a.id); // Sort descending by id
 
                     setAirports(sortedAirports);
                 }
@@ -330,7 +312,7 @@ const MainForm = () => {
                     }
                 };
 
-                // console.log("Submitting payload:", payload);
+                console.log("Submitting payload:", payload);
 
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/travel-details`, {
                     method: "POST",
@@ -484,14 +466,12 @@ const MainForm = () => {
                             <select
                                 {...register("pickup", { required: "Pickup location is required" })}
                                 className="w-full p-2 py-2.5 border border-gray-300 rounded-sm focus:outline-0"
+
                                 onChange={(e) => {
                                     const selected = airports.find(a => a.name === e.target.value);
                                     if (selected) setSelectedAirportName(selected);
                                 }}
                             >
-                                <option disabled selected>
-                                    Boston Logan International Airport (BOS)
-                                </option>
                                 {airports.map(airport => (
                                     <option key={airport.id} value={airport.name}>
                                         {airport.name}
@@ -509,15 +489,12 @@ const MainForm = () => {
                             <select
                                 {...register("dropoff", { required: "Dropoff location is required" })}
                                 className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
-                                value={selectedAirportName?.name || (airports[0]?.name ?? "")}
+
                                 onChange={(e) => {
-                                    const selected = airports.find(a => a?.name === e.target.value);
+                                    const selected = airports.find(a => a.name === e.target.value);
                                     if (selected) setSelectedAirportName(selected);
                                 }}
                             >
-                                <option disabled selected>
-                                    Boston Logan International Airport (BOS)
-                                </option>
                                 {airports.map(airport => (
                                     <option key={airport.id} value={airport?.name}>
                                         {airport.name}
