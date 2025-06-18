@@ -9,7 +9,21 @@ export default function StoreProvider({ children }: { children: React.ReactNode 
     const persistor = persistStore(store);
     return (
         <Provider store={store}>
-            <PersistGate loading="loading..." persistor={persistor} >
+            <PersistGate
+                loading={
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '100vh',
+                        fontSize: '1.5rem',
+                        color: '#555'
+                    }}>
+                        Loading...
+                    </div>
+                }
+                persistor={persistor}
+            >
                 {children}
             </PersistGate>
         </Provider>
