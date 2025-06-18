@@ -113,31 +113,27 @@ const MainForm = () => {
 
     // Sample airport data - replace with your actual airport data
     useEffect(() => {
-        // fetch("https://apis.bostonexpresscab.com/api/airports")
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (Array.isArray(data)) {
-        //             setAirports(data.map((airport, idx) => ({
-        //                 id: idx + 1,
-        //                 place_id: airport.place_id,
-        //                 name: airport.name
-        //             })));
-        //         }
-        //     })
-        //     .catch(err => {
-        //         console.error("Failed to fetch airports:", err);
-        //         setAirports([
-        //             { id: 1, place_id: "ChIJN0na1RRw44kRRFEtH8OUkww", name: "Boston Logan International Airport (BOS)" },
-        //         ]);
-        //     });
-        setAirports([
-            { id: 1, place_id: "ChIJN0na1RRw44kRRFEtH8OUkww", name: "Boston Logan International Airport (BOS)" },
-            { id: 2, place_id: "ChIJOwg_06VPwokRYv534QaPC8g", name: "New York, NY, USA" },
-        ]);
+        fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/airports`)
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    const sortedAirports = data
+                        .map((airport) => ({
+                            id: airport.id,
+                            place_id: airport.place_id,
+                            name: airport.name
+                        }))
 
+                    setAirports(sortedAirports);
+                }
+            })
+            .catch(err => {
+                console.error("Failed to fetch airports:", err);
+                setAirports([
+                    { id: 1, place_id: "ChIJN0na1RRw44kRRFEtH8OUkww", name: "Boston Logan International Airport (BOS)" },
+                ]);
+            });
     }, [])
-
-    console.log(airports[0]?.name)
     // Validate time selection when date or selectTime changes
     const watchedDate = watch("date");
     useEffect(() => {
@@ -288,6 +284,7 @@ const MainForm = () => {
     };
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
+        console.log(data.pickup)
         if (Number(distance) > 0) {
             setIsSubmitting(true);
             try {
@@ -492,6 +489,9 @@ const MainForm = () => {
                                     if (selected) setSelectedAirportName(selected);
                                 }}
                             >
+                                <option disabled selected>
+                                    Boston Logan International Airport (BOS)
+                                </option>
                                 {airports.map(airport => (
                                     <option key={airport.id} value={airport.name}>
                                         {airport.name}
@@ -509,13 +509,17 @@ const MainForm = () => {
                             <select
                                 {...register("dropoff", { required: "Dropoff location is required" })}
                                 className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
+                                value={selectedAirportName?.name || (airports[0]?.name ?? "")}
                                 onChange={(e) => {
-                                    const selected = airports.find(a => a.name === e.target.value);
+                                    const selected = airports.find(a => a?.name === e.target.value);
                                     if (selected) setSelectedAirportName(selected);
                                 }}
                             >
+                                <option disabled selected>
+                                    Boston Logan International Airport (BOS)
+                                </option>
                                 {airports.map(airport => (
-                                    <option key={airport.id} value={airport.name}>
+                                    <option key={airport.id} value={airport?.name}>
                                         {airport.name}
                                     </option>
                                 ))}
