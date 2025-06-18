@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import fromImage from "@/assets/images/icons/arraving-airplane-white.png";
 import toImage from "@/assets/images/icons/plane-taking-off-white.png";
@@ -32,11 +32,22 @@ type Inputs = {
 interface PlaceSelectHandler {
     (placeId: string, description: string): void;
 }
+interface AirportList {
+    id: number,
+    place_id: string,
+    name: string
+}
 const MainForm = () => {
     const router = useRouter();
     const [selectedVehicle, setSelectedVehicle] = useState(1); // Default to From Airport (id: 1)
     const [showAdditionalOptions, setShowAdditionalOptions] = useState(true);
     const [showAdditionalPetsOptions, setShowAdditionalPetsOptions] = useState(false);
+    const [airports, setAirports] = useState<AirportList[]>([]);
+    const [selectedAirportName, setSelectedAirportName] = useState<AirportList>({
+        id: 1,
+        place_id: "ChIJN0na1RRw44kRRFEtH8OUkww",
+        name: "Boston Logan International Airport (BOS)"
+    });
     const [catSeat, setCatSeat] = useState(0);
     const [catSeatTotal, setCatSeatTotal] = useState(0);
     const [dogSeat, setDogSeat] = useState(0);
@@ -96,24 +107,49 @@ const MainForm = () => {
     const childrenCount = watch("children");
     const childSeatsCount = watch("childSeats");
     // Date handling
-    const today = new Date();
+    const today = useMemo(() => new Date(), []);
     const minDate = format(today, 'yyyy-MM-dd');
     const maxDate = format(addDays(today, 90), 'yyyy-MM-dd'); // Allow booking up to 90 days in advance
 
     // Sample airport data - replace with your actual airport data
-    const airports = [
-        { id: 1, place_id: "ChIJN0na1RRw44kRRFEtH8OUkww", name: "Boston Logan International Airport (BOS)" },
-    ];
+    useEffect(() => {
+        // fetch("https://apis.bostonexpresscab.com/api/airports")
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (Array.isArray(data)) {
+        //             setAirports(data.map((airport, idx) => ({
+        //                 id: idx + 1,
+        //                 place_id: airport.place_id,
+        //                 name: airport.name
+        //             })));
+        //         }
+        //     })
+        //     .catch(err => {
+        //         console.error("Failed to fetch airports:", err);
+        //         setAirports([
+        //             { id: 1, place_id: "ChIJN0na1RRw44kRRFEtH8OUkww", name: "Boston Logan International Airport (BOS)" },
+        //         ]);
+        //     });
+        setAirports([
+            { id: 1, place_id: "ChIJN0na1RRw44kRRFEtH8OUkww", name: "Boston Logan International Airport (BOS)" },
+            { id: 2, place_id: "ChIJOwg_06VPwokRYv534QaPC8g", name: "New York, NY, USA" },
+        ]);
 
+    }, [])
+
+    console.log(airports[0]?.name)
     // Validate time selection when date or selectTime changes
+    const watchedDate = watch("date");
     useEffect(() => {
         if (selectedVehicle == 1) {
-            setPickupPlaceId("ChIJN0na1RRw44kRRFEtH8OUkww");
+            setPickupPlaceId(selectedAirportName?.place_id);
+            console.log(selectedAirportName?.place_id)
         } else if (selectedVehicle == 2) {
-            setDropoffPlaceId("ChIJN0na1RRw44kRRFEtH8OUkww");
+            setDropoffPlaceId(selectedAirportName?.place_id);
+            console.log(selectedAirportName?.place_id)
         }
 
-        if (watch("date") === format(today, 'yyyy-MM-dd')) {
+        if (watchedDate === format(today, 'yyyy-MM-dd')) {
             if (
                 selectTime &&
                 (
@@ -148,7 +184,7 @@ const MainForm = () => {
                 }
             }
         }
-    }, [watch("date"), selectTime, selectedVehicle]);
+    }, [watchedDate, selectTime, selectedVehicle, selectedAirportName, today, watch]);
 
     // Simplified time options (every 15 minutes)
     const times = Array.from({ length: 96 }, (_, i) => {
@@ -191,7 +227,6 @@ const MainForm = () => {
 
     useEffect(() => {
         const data1 = selectedVehicle === 1 ? "from_airport" : selectedVehicle === 2 ? "to_airport" : "door_to_door";
-        const data2 = selectedVehicle === 1 ? dropoffInp : selectedVehicle === 2 ? pickupInp : "door_to_door";
         const params = new URLSearchParams({
             passenger_seat: String(watchedPassengers),
             distance: distance !== null ? String(distance) : "0",
@@ -202,10 +237,11 @@ const MainForm = () => {
             dog_seat_number: String(dogSeat),
             luggage_number: String(watchedLuggage),
             selected_location: selectedVehicle === 1 ? "from_airport" : selectedVehicle === 2 ? "to_airport" : "door_to_door",
-            selected_airport_name: selectedVehicle === 1 ? dropoffInp : selectedVehicle === 2 ? pickupInp : "door_to_door",
+            // selected_airport_name: selectedVehicle === 1 ? dropoffInp : selectedVehicle === 2 ? pickupInp : "door_to_door",
+            selected_airport_name: selectedAirportName ? selectedAirportName.name : "",
             time: selectTime || "",
         });
-        console.log("Passengers:", String(watchedPassengers), "time:", String(selectTime), "distance:", String(distance), "infantSeats:", "selected_airport_name", data2, String(infantSeats), "regularSeats:", String(regularSeats), "boosterSeats:", String(boosterSeats), "selected Location", data1, "luggage:", String(watchedLuggage))
+        console.log("Passengers:", String(watchedPassengers), "time:", String(selectTime), "distance:", String(distance), "selected_airport_name:", selectedAirportName?.name, "infantSeats:", String(infantSeats), "regularSeats:", String(regularSeats), "boosterSeats:", String(boosterSeats), "selected Location", data1, "luggage:", String(watchedLuggage))
         fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/fare?` + params)
             .then(res => res.json())
             .then(data => {
@@ -240,7 +276,7 @@ const MainForm = () => {
                 setMinimumFare(data?.minimumFare);
             })
             .catch(err => console.error('API Error:', err));
-    }, [watchedPassengers, selectTime, watchedLuggage, infantSeats, regularSeats, boosterSeats, distance, dropoffPlaceId, catSeat, dogSeat, selectedVehicle, pickupInp, dropoffInp, watch]);
+    }, [watchedPassengers, selectTime, watchedLuggage, infantSeats, regularSeats, boosterSeats, distance, dropoffPlaceId, catSeat, dogSeat, selectedVehicle, pickupInp, dropoffInp, selectedAirportName, watch]);
 
     const toggleAdditionalOptions = () => {
         setShowAdditionalPetsOptions(false);
@@ -334,6 +370,7 @@ const MainForm = () => {
     const handlePickupInp: PlaceSelectHandler = (placeId, description) => {
         setPickupInp(description);
         setPickupPlaceId(placeId);
+        console.log(placeId)
     }
 
     const handleDropoffInp: PlaceSelectHandler = (placeId, description) => {
@@ -450,6 +487,10 @@ const MainForm = () => {
                             <select
                                 {...register("pickup", { required: "Pickup location is required" })}
                                 className="w-full p-2 py-2.5 border border-gray-300 rounded-sm focus:outline-0"
+                                onChange={(e) => {
+                                    const selected = airports.find(a => a.name === e.target.value);
+                                    if (selected) setSelectedAirportName(selected);
+                                }}
                             >
                                 {airports.map(airport => (
                                     <option key={airport.id} value={airport.name}>
@@ -468,6 +509,10 @@ const MainForm = () => {
                             <select
                                 {...register("dropoff", { required: "Dropoff location is required" })}
                                 className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
+                                onChange={(e) => {
+                                    const selected = airports.find(a => a.name === e.target.value);
+                                    if (selected) setSelectedAirportName(selected);
+                                }}
                             >
                                 {airports.map(airport => (
                                     <option key={airport.id} value={airport.name}>

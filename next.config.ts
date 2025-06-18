@@ -2,7 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['maamun.xyz', 'bostonexpresscab.com', 'admin.bostonexpresscab.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'maamun.xyz',
+      },
+      {
+        protocol: 'https',
+        hostname: 'bostonexpresscab.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'admin.bostonexpresscab.com',
+      },
+    ],
   },
 
 };

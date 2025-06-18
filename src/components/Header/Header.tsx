@@ -46,7 +46,7 @@ const Header = () => {
         {
             id: 3,
             title: "Reservation",
-            slag: "/boston-taxi-reservation.php"
+            slag: "/boston-taxi-reservation"
         },
         {
             id: 4,
@@ -61,7 +61,7 @@ const Header = () => {
         {
             id: 6,
             title: "Contact",
-            slag: "/contact-us.php"
+            slag: "/contact-us"
         },
         {
             id: 7,

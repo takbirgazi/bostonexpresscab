@@ -46,10 +46,14 @@ const BlogPage = () => {
         <div className="bg-gradient-to-r from-blue-100 via-white to-blue-100">
             <PageHeader pageHeaderData={pageHeaderData} />
             <div className="max-w-7xl mx-auto px-4 py-10">
-                <h1 className="text-4xl font-bold mb-10 text-center">Latest Blog Posts</h1>
+            <h1 className="text-4xl font-bold mb-10 text-center">Latest Blog Posts</h1>
+            {posts.length === 0 ? (
+                <div className="text-center py-20 text-lg text-gray-500">Loading...</div>
+            ) : (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {posts.map((post) => <BlogCard key={post.id} blogData={post} />)}
+                {posts.map((post) => <BlogCard key={post.id} blogData={post} />)}
                 </div>
+            )}
             </div>
         </div>
     );
