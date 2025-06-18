@@ -443,6 +443,44 @@ const MainForm = () => {
                 </div>
                 <div className="flex flex-col md:flex-row gap-2">
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
+                        <label className="block text-xl md:text-sm font-medium text-black">
+                            {selectedVehicle === 1 ? "Select From Airport" : "Provide Complete PickUp Address"}
+                        </label>
+                        {selectedVehicle === 1 ? (
+                            <select
+                                {...register("pickup", { required: "Pickup location is required" })}
+                                className="w-full p-2 py-2.5 border border-gray-300 rounded-sm focus:outline-0"
+                            >
+                                {airports.map(airport => (
+                                    <option key={airport.id} value={airport.name}>
+                                        {airport.name}
+                                    </option>
+                                ))}
+                            </select>
+                        ) : (<LocationSearch setLocationChanging={setChangePickup} onSelect={handlePickupInp} />)}
+                        {errors.pickup && <span className="text-red-500 text-xs">{errors.pickup.message}</span>}
+                    </div>
+                    <div className="flex flex-col gap-1 w-full md:w-1/2">
+                        <label className="block text-xl md:text-sm font-medium text-black">
+                            {selectedVehicle === 2 ? "Select To Airport" : "Provide Complete Drop Off Address"}
+                        </label>
+                        {selectedVehicle === 2 ? (
+                            <select
+                                {...register("dropoff", { required: "Dropoff location is required" })}
+                                className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
+                            >
+                                {airports.map(airport => (
+                                    <option key={airport.id} value={airport.name}>
+                                        {airport.name}
+                                    </option>
+                                ))}
+                            </select>
+                        ) : (<LocationSearch setLocationChanging={setChangeDropoff} onSelect={handleDropoffInp} />)}
+                        {errors.dropoff && <span className="text-red-500 text-xs">{errors.dropoff.message}</span>}
+                    </div>
+                </div>
+                <div className="flex flex-col md:flex-row gap-2">
+                    <div className="flex flex-col gap-1 w-full md:w-1/2">
                         <label className="block text-xl md:text-sm font-medium text-black">Luggage</label>
                         <select
                             {...register("luggage")}
@@ -488,44 +526,7 @@ const MainForm = () => {
                         </div>
                     )}
                 </div>
-                <div className="flex flex-col md:flex-row gap-2">
-                    <div className="flex flex-col gap-1 w-full md:w-1/2">
-                        <label className="block text-xl md:text-sm font-medium text-black">
-                            {selectedVehicle === 1 ? "Select From Airport" : "Provide Complete PickUp Address"}
-                        </label>
-                        {selectedVehicle === 1 ? (
-                            <select
-                                {...register("pickup", { required: "Pickup location is required" })}
-                                className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
-                            >
-                                {airports.map(airport => (
-                                    <option key={airport.id} value={airport.name}>
-                                        {airport.name}
-                                    </option>
-                                ))}
-                            </select>
-                        ) : (<LocationSearch setLocationChanging={setChangePickup} onSelect={handlePickupInp} />)}
-                        {errors.pickup && <span className="text-red-500 text-xs">{errors.pickup.message}</span>}
-                    </div>
-                    <div className="flex flex-col gap-1 w-full md:w-1/2">
-                        <label className="block text-xl md:text-sm font-medium text-black">
-                            {selectedVehicle === 2 ? "Select To Airport" : "Provide Complete Drop Off Address"}
-                        </label>
-                        {selectedVehicle === 2 ? (
-                            <select
-                                {...register("dropoff", { required: "Dropoff location is required" })}
-                                className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
-                            >
-                                {airports.map(airport => (
-                                    <option key={airport.id} value={airport.name}>
-                                        {airport.name}
-                                    </option>
-                                ))}
-                            </select>
-                        ) : (<LocationSearch setLocationChanging={setChangeDropoff} onSelect={handleDropoffInp} />)}
-                        {errors.dropoff && <span className="text-red-500 text-xs">{errors.dropoff.message}</span>}
-                    </div>
-                </div>
+
                 <div className="flex flex-col md:flex-row gap-2">
                     <button
                         type="button"

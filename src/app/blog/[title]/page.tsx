@@ -70,7 +70,7 @@ export default function BlogPage() {
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center h-screen bg-gradient-to-r from-blue-100 via-white to-blue-100">
+            <div className="flex items-center justify-center h-[100svh] bg-gradient-to-r from-blue-100 via-white to-blue-100">
                 <p className="text-gray-600">Loading blog...</p>
             </div>
         );
@@ -78,7 +78,7 @@ export default function BlogPage() {
 
     if (error || !blog) {
         return (
-            <div className="flex items-center justify-center h-screen text-center bg-gradient-to-r from-blue-100 via-white to-blue-100 px-4">
+            <div className="flex items-center justify-center h-[100svh] text-center bg-gradient-to-r from-blue-100 via-white to-blue-100 px-4">
                 <div>
                     <h1 className="text-3xl font-bold text-red-600">404 - Blog Not Found</h1>
                     <p className="text-gray-600 mt-2">Sorry, the blog post you&lsquo;re looking for doesn&lsquo;t exist.</p>
