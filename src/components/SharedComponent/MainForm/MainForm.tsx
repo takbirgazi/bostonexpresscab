@@ -700,7 +700,7 @@ const MainForm = () => {
                     )}
                 </div>
                 <div className="flex justify-between items-end mt-4">
-                    <h2 className="font-bold text-xl font-poppins">Total: <span>${totalFare}</span></h2>
+                    <h2 className="font-bold text-xl font-poppins">Total: <span>${Math.round(totalFare)}</span></h2>
                     <div className="flex flex-col items-end">
                         <p className="text-gray-700 text-xs px-3 md:text-sm font-lato font-bold bg-yellow-200 p-1 rounded">Get 10% Discount on cash payments</p>
                         <button
