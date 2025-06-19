@@ -1,6 +1,9 @@
 import Image from "next/image";
 import car_1 from "@/assets/images/cars/car_1.jpg";
-import reviewImage from "@/assets/images/review.jpg";
+import trustpilot from "@/assets/images/trustpilot.png";
+import tripadvisor from "@/assets/images/tripadvisor.png";
+import limotrust from "@/assets/images/limotrust.png";
+import google_ratings from "@/assets/images/google_ratings.png";
 
 const HomeContent = () => {
     return (
@@ -96,12 +99,34 @@ const HomeContent = () => {
                 </div>
                 <div className="w-full md:w-1/4">
                     <h2 className="text-lg md:text-2xl font-bold font-lato px-6">Ratings on Top Sites</h2>
-                    <figure className="py-5 hidden md:block">
-                        <Image src={reviewImage} alt="Review" height={600} width={800} />
-                    </figure>
-                    <figure className="py-5 block md:hidden">
-                        <Image src={reviewImage} alt="Review" height={600} width={800} />
-                    </figure>
+                    <div className="py-5 hidden md:block">
+                        <figure>
+                            <Image src={trustpilot} alt="Trustpilot Ratings" height={600} width={800} />
+                        </figure>
+                        <figure>
+                            <Image src={tripadvisor} alt="Tripadvisor Ratings" height={600} width={800} />
+                        </figure>
+                        <figure>
+                            <Image src={limotrust} alt="Limotrust Ratings" height={600} width={800} />
+                        </figure>
+                        <figure>
+                            <Image src={google_ratings} alt="Google Ratings" height={600} width={800} />
+                        </figure>
+                    </div>
+                    <div className="py-5 block md:hidden">
+                        <figure>
+                            <Image src={trustpilot} alt="Trustpilot Ratings" height={600} width={800} />
+                        </figure>
+                        <figure>
+                            <Image src={tripadvisor} alt="Tripadvisor Ratings" height={600} width={800} />
+                        </figure>
+                        <figure>
+                            <Image src={limotrust} alt="Limotrust Ratings" height={600} width={800} />
+                        </figure>
+                        <figure>
+                            <Image src={google_ratings} alt="Google Ratings" height={600} width={800} />
+                        </figure>
+                    </div>
                 </div>
             </div>
         </div>

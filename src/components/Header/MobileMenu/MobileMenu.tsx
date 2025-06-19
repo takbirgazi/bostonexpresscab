@@ -13,7 +13,7 @@ const MobileMenu: React.FC<MenuType> = ({ links, atTop }) => {
             </div>
             <div className={`${isActive ? "h-72 py-4" : "h-0"} md:hidden flex flex-col gap-3 absolute w-full left-0 top-[85px] bg-[#ffffff] transition-all duration-500 overflow-auto`}>
                 {
-                    links.map(menu => <Link className="font-bold text-gray-800 w-10/12 mx-auto" href={menu.slag} key={menu.id}>{menu.title}</Link>)
+                    links.map(menu => <Link onClick={() => setIsActive(false)} className="font-bold text-gray-800 w-10/12 mx-auto" href={menu.slag} key={menu.id}>{menu.title}</Link>)
                 }
             </div>
         </div>

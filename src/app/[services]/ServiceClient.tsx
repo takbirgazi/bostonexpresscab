@@ -9,7 +9,10 @@ import Link from "next/link";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import reviewImage from "@/assets/images/review.jpg";
+import trustpilot from "@/assets/images/trustpilot.png";
+import tripadvisor from "@/assets/images/tripadvisor.png";
+import limotrust from "@/assets/images/limotrust.png";
+import google_ratings from "@/assets/images/google_ratings.png";
 
 
 const ServiceClient = ({ route }: { route: string }) => {
@@ -69,12 +72,34 @@ const ServiceClient = ({ route }: { route: string }) => {
                 <div className="w-full md:w-6/12 md:-mt-14">
                     <MainForm />
                     <div className="w-full md:w-1/2 mx-auto">
-                        <figure className="py-5 hidden md:block">
-                            <Image src={reviewImage} alt="Review" height={600} width={800} />
-                        </figure>
-                        <figure className="py-5 block md:hidden">
-                            <Image src={reviewImage} alt="Review" height={600} width={800} />
-                        </figure>
+                        <div className="py-5 hidden md:block">
+                            <figure>
+                                <Image src={trustpilot} alt="Trustpilot Ratings" height={600} width={800} />
+                            </figure>
+                            <figure>
+                                <Image src={tripadvisor} alt="Tripadvisor Ratings" height={600} width={800} />
+                            </figure>
+                            <figure>
+                                <Image src={limotrust} alt="Limotrust Ratings" height={600} width={800} />
+                            </figure>
+                            <figure>
+                                <Image src={google_ratings} alt="Google Ratings" height={600} width={800} />
+                            </figure>
+                        </div>
+                        <div className="py-5 block md:hidden">
+                            <figure>
+                                <Image src={trustpilot} alt="Trustpilot Ratings" height={600} width={800} />
+                            </figure>
+                            <figure>
+                                <Image src={tripadvisor} alt="Tripadvisor Ratings" height={600} width={800} />
+                            </figure>
+                            <figure>
+                                <Image src={limotrust} alt="Limotrust Ratings" height={600} width={800} />
+                            </figure>
+                            <figure>
+                                <Image src={google_ratings} alt="Google Ratings" height={600} width={800} />
+                            </figure>
+                        </div>
                     </div>
                 </div>
             </div>
