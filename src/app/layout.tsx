@@ -42,6 +42,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-site-verification" content="gzdoZuP-2-R_0mGQ4I8T2MKMftqqvqgspazPHTiKy1w" />
       </head>
       <body
         className={`${lato.variable} ${poppins.variable} ${outfit.variable}`}
