@@ -104,16 +104,13 @@ const MainForm = () => {
                             place_id: airport.place_id,
                             name: airport.name
                         }))
-                        .sort((a, b) => b.id - a.id); // Sort descending by id
+                    // .sort((a, b) => b.id - a.id); // Sort descending by id
 
                     setAirports(sortedAirports);
                 }
             })
             .catch(err => {
                 console.error("Failed to fetch airports:", err);
-                setAirports([
-                    { id: 1, place_id: "ChIJN0na1RRw44kRRFEtH8OUkww", name: "Boston Logan International Airport (BOS)" },
-                ]);
             });
     }, [])
     // Validate time selection when date or selectTime changes
@@ -466,13 +463,13 @@ const MainForm = () => {
                             <select
                                 {...register("pickup", { required: "Pickup location is required" })}
                                 className="w-full p-2 py-2.5 border border-gray-300 rounded-sm focus:outline-0"
-
+                                value={selectedAirportName?.name || (airports[0]?.name ?? "")}
                                 onChange={(e) => {
                                     const selected = airports.find(a => a.name === e.target.value);
                                     if (selected) setSelectedAirportName(selected);
                                 }}
                             >
-                                {airports.map(airport => (
+                                {airports.map((airport) => (
                                     <option key={airport.id} value={airport.name}>
                                         {airport.name}
                                     </option>
@@ -489,13 +486,13 @@ const MainForm = () => {
                             <select
                                 {...register("dropoff", { required: "Dropoff location is required" })}
                                 className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
-
+                                defaultValue={selectedAirportName?.name || (airports[0]?.name ?? "")}
                                 onChange={(e) => {
                                     const selected = airports.find(a => a.name === e.target.value);
                                     if (selected) setSelectedAirportName(selected);
                                 }}
                             >
-                                {airports.map(airport => (
+                                {airports.map((airport) => (
                                     <option key={airport.id} value={airport?.name}>
                                         {airport.name}
                                     </option>
