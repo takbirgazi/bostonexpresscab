@@ -463,12 +463,15 @@ const MainForm = () => {
                             <select
                                 {...register("pickup", { required: "Pickup location is required" })}
                                 className="w-full p-2 py-2.5 border border-gray-300 rounded-sm focus:outline-0"
-                                value={selectedAirportName?.name || (airports[0]?.name ?? "")}
+                                // value={selectedAirportName?.name || (airports[0]?.name ?? "")}
                                 onChange={(e) => {
                                     const selected = airports.find(a => a.name === e.target.value);
                                     if (selected) setSelectedAirportName(selected);
                                 }}
                             >
+                                <option selected disabled>
+                                    Select Airport
+                                </option>
                                 {airports.map((airport) => (
                                     <option key={airport.id} value={airport.name}>
                                         {airport.name}
@@ -486,12 +489,15 @@ const MainForm = () => {
                             <select
                                 {...register("dropoff", { required: "Dropoff location is required" })}
                                 className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
-                                defaultValue={selectedAirportName?.name || (airports[0]?.name ?? "")}
+                                // defaultValue={selectedAirportName?.name || (airports[0]?.name ?? "")}
                                 onChange={(e) => {
                                     const selected = airports.find(a => a.name === e.target.value);
                                     if (selected) setSelectedAirportName(selected);
                                 }}
                             >
+                                <option selected disabled>
+                                    Select Airport
+                                </option>
                                 {airports.map((airport) => (
                                     <option key={airport.id} value={airport?.name}>
                                         {airport.name}
