@@ -72,33 +72,27 @@ const ServiceClient = ({ route }: { route: string }) => {
                 <div className="w-full md:w-6/12 md:-mt-14">
                     <MainForm />
                     <div className="w-full md:w-1/2 mx-auto">
-                        <div className="py-5 hidden md:block">
-                            <figure>
-                                <Image src={trustpilot} alt="Trustpilot Ratings" height={600} width={800} />
-                            </figure>
-                            <figure>
-                                <Image src={tripadvisor} alt="Tripadvisor Ratings" height={600} width={800} />
-                            </figure>
-                            <figure>
-                                <Image src={limotrust} alt="Limotrust Ratings" height={600} width={800} />
-                            </figure>
-                            <figure>
-                                <Image src={google_ratings} alt="Google Ratings" height={600} width={800} />
-                            </figure>
-                        </div>
-                        <div className="py-5 block md:hidden">
-                            <figure>
-                                <Image src={trustpilot} alt="Trustpilot Ratings" height={600} width={800} />
-                            </figure>
-                            <figure>
-                                <Image src={tripadvisor} alt="Tripadvisor Ratings" height={600} width={800} />
-                            </figure>
-                            <figure>
-                                <Image src={limotrust} alt="Limotrust Ratings" height={600} width={800} />
-                            </figure>
-                            <figure>
-                                <Image src={google_ratings} alt="Google Ratings" height={600} width={800} />
-                            </figure>
+                        <div className="py-5">
+                            <a href="https://www.trustpilot.com/review/bostonexpresscab.com" target="_blank" rel="noopener noreferrer">
+                                <figure>
+                                    <Image src={trustpilot} alt="Trustpilot Ratings" height={600} width={800} />
+                                </figure>
+                            </a>
+                            <a href="https://www.tripadvisor.com/Attraction_Review-g41948-d28108453-Reviews-Boston_Express_Cab-Woburn_Massachusetts.html" target="_blank" rel="noopener noreferrer">
+                                <figure>
+                                    <Image src={tripadvisor} alt="Tripadvisor Ratings" height={600} width={800} />
+                                </figure>
+                            </a>
+                            <a href="https://www.tripadvisor.com/Attraction_Review-g41948-d28108453-Reviews-Boston_Express_Cab-Woburn_Massachusetts.html" target="_blank" rel="noopener noreferrer">
+                                <figure>
+                                    <Image src={limotrust} alt="Limotrust Ratings" height={600} width={800} />
+                                </figure>
+                            </a>
+                            <a href="https://g.co/kgs/J6Jpg8S" target="_blank" rel="noopener noreferrer">
+                                <figure>
+                                    <Image src={google_ratings} alt="Google Ratings" height={600} width={800} />
+                                </figure>
+                            </a>
                         </div>
                     </div>
                 </div>

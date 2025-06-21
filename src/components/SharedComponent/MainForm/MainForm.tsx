@@ -216,7 +216,9 @@ const MainForm = () => {
             selected_airport_name: selectedAirportName ? selectedAirportName.name : "",
             time: selectTime || "",
         });
-        console.log("Passengers:", String(watchedPassengers), "time:", String(selectTime), "distance:", String(distance), "selected_airport_name:", selectedAirportName?.name, "infantSeats:", String(infantSeats), "regularSeats:", String(regularSeats), "boosterSeats:", String(boosterSeats), "selected Location", data1, "luggage:", String(watchedLuggage))
+
+        console.log("Passengers:", String(watchedPassengers), "time:", String(selectTime), "distance:", String(distance), "selected_airport_name:", selectedAirportName?.name, "infantSeats:", String(infantSeats), "regularSeats:", String(regularSeats), "boosterSeats:", String(boosterSeats), "selected Location", data1, "luggage:", String(watchedLuggage));
+
         fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/fare?` + params)
             .then(res => res.json())
             .then(data => {
@@ -433,31 +435,9 @@ const MainForm = () => {
                         <SelectOption selectOptionData={{ title: "Time", selectData: times, selectValue: setSelectTime }} />
                     </div>
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
-                        <label className="text-xs md:text-sm flex gap-1 items-center font-medium text-black">
-                            <span className="text-black text-xl md:text-sm ml-1">Passenger</span>
-                            <div className="relative group">
-                                <div>
-                                    <HiOutlineInformationCircle className="text-red-500" />
-                                </div>
-                                <div className="absolute hidden group-hover:block bg-black text-white text-xs rounded py-1 px-2 bottom-full mb-1 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
-                                    Adults - 8 Years & above
-                                </div>
-                            </div>
-                        </label>
-                        <select
-                            {...register("passengers", { required: "Passenger count is required" })}
-                            className="w-full p-2 py-2.5 border border-gray-300 rounded-sm focus:outline-0">
-                            {[1, 2, 3, 4, 5, 6, 7].map(num => (
-                                <option key={num} value={num}>{num}</option>
-                            ))}
-                        </select>
-                        {errors.passengers && <span className="text-red-500 text-xs">{errors.passengers.message}</span>}
-                    </div>
-                </div>
-                <div className="flex flex-col md:flex-row gap-2">
-                    <div className="flex flex-col gap-1 w-full md:w-1/2">
+
                         <label className="block text-xl md:text-sm font-medium text-black">
-                            {selectedVehicle === 1 ? "Select From Airport" : "Provide Complete PickUp Address"}
+                            {selectedVehicle === 1 ? "Select From Airport" : "PickUp Address"}
                         </label>
                         {selectedVehicle === 1 ? (
                             <select
@@ -481,9 +461,12 @@ const MainForm = () => {
                         ) : (<LocationSearch setLocationChanging={setChangePickup} onSelect={handlePickupInp} />)}
                         {errors.pickup && <span className="text-red-500 text-xs">{errors.pickup.message}</span>}
                     </div>
+                </div>
+                <div className="flex flex-col md:flex-row gap-2">
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
+
                         <label className="block text-xl md:text-sm font-medium text-black">
-                            {selectedVehicle === 2 ? "Select To Airport" : "Provide Complete Drop Off Address"}
+                            {selectedVehicle === 2 ? "Select To Airport" : "Drop Off Address"}
                         </label>
                         {selectedVehicle === 2 ? (
                             <select
@@ -507,6 +490,27 @@ const MainForm = () => {
                         ) : (<LocationSearch setLocationChanging={setChangeDropoff} onSelect={handleDropoffInp} />)}
                         {errors.dropoff && <span className="text-red-500 text-xs">{errors.dropoff.message}</span>}
                     </div>
+                    <div className="flex flex-col gap-1 w-full md:w-1/2">
+                        <label className="text-xs md:text-sm flex gap-1 items-center font-medium text-black">
+                            <span className="text-black text-xl md:text-sm ml-1">Passenger</span>
+                            <div className="relative group">
+                                <div>
+                                    <HiOutlineInformationCircle className="text-sm text-red-500" />
+                                </div>
+                                <div className="absolute hidden group-hover:block bg-black text-white text-xs rounded py-1 px-2 bottom-full mb-1 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
+                                    Adults - 8 Years & above
+                                </div>
+                            </div>
+                        </label>
+                        <select
+                            {...register("passengers", { required: "Passenger count is required" })}
+                            className="w-full p-2 py-2.5 border border-gray-300 rounded-sm focus:outline-0">
+                            {[1, 2, 3, 4, 5, 6, 7].map(num => (
+                                <option key={num} value={num}>{num}</option>
+                            ))}
+                        </select>
+                        {errors.passengers && <span className="text-red-500 text-xs">{errors.passengers.message}</span>}
+                    </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-2">
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
@@ -525,7 +529,7 @@ const MainForm = () => {
                             <span className="text-black ml-1">Children</span>
                             <div className="relative group">
                                 <div>
-                                    <HiOutlineInformationCircle className="text-red-500" />
+                                    <HiOutlineInformationCircle className="text-sm text-red-500" />
                                 </div>
                                 <div className="absolute hidden group-hover:block bg-black text-white text-xs rounded py-1 px-2 bottom-full mb-1 left-1/2 transform -translate-x-1/2 whitespace-nowrap">
                                     Children - Upto 7 Years
@@ -556,7 +560,7 @@ const MainForm = () => {
                     )}
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-2">
+                <div className="flex flex-col-reverse md:flex-row gap-2">
                     <button
                         type="button"
                         onClick={toggleAdditionalPetsOptions}
@@ -708,7 +712,7 @@ const MainForm = () => {
                 <div className="flex justify-between items-end mt-4">
                     <h2 className="font-bold text-xl font-poppins">Total: <span>${Math.round(totalFare)}</span></h2>
                     <div className="flex flex-col items-end">
-                        <p className="text-gray-700 text-xs px-3 md:text-sm font-lato font-bold bg-yellow-200 p-1 rounded">Get 10% Discount on cash payments</p>
+                        <p className="text-white text-xs px-3 md:text-sm font-lato font-bold bg-red-400 p-1 rounded">Get 10% Discount on cash payments</p>
                         <button
                             type="submit"
                             className="flex justify-end mt-3"

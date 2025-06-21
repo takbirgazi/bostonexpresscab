@@ -44,7 +44,7 @@ const RentsCard: React.FC<RentsCardType> = ({ rentCardData }) => {
                     <h2 className="text-3xl font-semibold font-poppins text-gray-800">$ {rentCardData.dailyRate}<span className="text-sm font-light text-gray-600">/KM</span></h2>
                 </div>
                 <div>
-                    <button className="px-4 py-1.5 rounded-sm bg-mainColor text-white font-semibold cursor-pointer">Rent Now</button>
+                    <button className="px-4 py-1.5 rounded-sm bg-mainColor text-white font-semibold cursor-pointer">Book Now</button>
                 </div>
             </div>
         </div>
