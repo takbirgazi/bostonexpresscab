@@ -13,10 +13,12 @@ import trustpilot from "@/assets/images/trustpilot.png";
 import tripadvisor from "@/assets/images/tripadvisor.png";
 import limotrust from "@/assets/images/limotrust.png";
 import google_ratings from "@/assets/images/google_ratings.png";
+import { useRouter } from "next/navigation";
 
 
 const ServiceClient = ({ route }: { route: string }) => {
     const [pageHeading, setPageHeading] = useState("");
+    const router = useRouter();
     const [data, setData] = useState({
         title: "",
         description: ""
@@ -27,6 +29,12 @@ const ServiceClient = ({ route }: { route: string }) => {
         bgImage: pageHeaderBg.src
     };
 
+    if (route == "boston-taxi-reservation.php") {
+        router.push(`/boston-taxi-reservation`);
+    } else if (route == "contact-us.php") {
+        router.push(`/contact-us`);
+    }
+    
     useEffect(() => {
         const fetchData = async () => {
             const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/service-posts/${route}`, {
@@ -73,6 +81,11 @@ const ServiceClient = ({ route }: { route: string }) => {
                     <MainForm />
                     <div className="w-full md:w-1/2 mx-auto">
                         <div className="py-5">
+                            <a href="https://g.co/kgs/J6Jpg8S" target="_blank" rel="noopener noreferrer">
+                                <figure>
+                                    <Image src={google_ratings} alt="Google Ratings" height={600} width={800} />
+                                </figure>
+                            </a>
                             <a href="https://www.trustpilot.com/review/bostonexpresscab.com" target="_blank" rel="noopener noreferrer">
                                 <figure>
                                     <Image src={trustpilot} alt="Trustpilot Ratings" height={600} width={800} />
@@ -83,14 +96,9 @@ const ServiceClient = ({ route }: { route: string }) => {
                                     <Image src={tripadvisor} alt="Tripadvisor Ratings" height={600} width={800} />
                                 </figure>
                             </a>
-                            <a href="https://www.tripadvisor.com/Attraction_Review-g41948-d28108453-Reviews-Boston_Express_Cab-Woburn_Massachusetts.html" target="_blank" rel="noopener noreferrer">
+                            <a href="https://limotrust.org/listing/boston-express-cab-60" target="_blank" rel="noopener noreferrer">
                                 <figure>
                                     <Image src={limotrust} alt="Limotrust Ratings" height={600} width={800} />
-                                </figure>
-                            </a>
-                            <a href="https://g.co/kgs/J6Jpg8S" target="_blank" rel="noopener noreferrer">
-                                <figure>
-                                    <Image src={google_ratings} alt="Google Ratings" height={600} width={800} />
                                 </figure>
                             </a>
                         </div>

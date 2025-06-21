@@ -78,6 +78,8 @@ const MainForm = () => {
     } = useForm<Inputs>({
         defaultValues: {
             passengers: 1,
+            stopover: 0,
+            byke: 0,
             children: 0,
             childSeats: 0,
             luggage: 0,
@@ -416,25 +418,6 @@ const MainForm = () => {
                 }
                 <div className="flex flex-col md:flex-row gap-2">
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
-                        <label className="block text-xl md:text-sm font-medium text-black">
-                            Select Date
-                        </label>
-                        <input
-                            type="date"
-                            min={minDate}
-                            max={maxDate}
-                            {...register("date", { required: "Date is required" })}
-                            className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
-                        />
-                        {errors.date && (
-                            <p className="mt-1 text-sm text-red-600">{errors.date.message}</p>
-                        )}
-                    </div>
-                    <div className="flex flex-col gap-1 w-full md:w-1/2">
-                        <label className="block text-xl md:text-sm font-medium text-black">Time</label>
-                        <SelectOption selectOptionData={{ title: "Time", selectData: times, selectValue: setSelectTime }} />
-                    </div>
-                    <div className="flex flex-col gap-1 w-full md:w-1/2">
 
                         <label className="block text-xl md:text-sm font-medium text-black">
                             {selectedVehicle === 1 ? "Select From Airport" : "PickUp Address"}
@@ -461,8 +444,6 @@ const MainForm = () => {
                         ) : (<LocationSearch setLocationChanging={setChangePickup} onSelect={handlePickupInp} />)}
                         {errors.pickup && <span className="text-red-500 text-xs">{errors.pickup.message}</span>}
                     </div>
-                </div>
-                <div className="flex flex-col md:flex-row gap-2">
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
 
                         <label className="block text-xl md:text-sm font-medium text-black">
@@ -490,6 +471,27 @@ const MainForm = () => {
                         ) : (<LocationSearch setLocationChanging={setChangeDropoff} onSelect={handleDropoffInp} />)}
                         {errors.dropoff && <span className="text-red-500 text-xs">{errors.dropoff.message}</span>}
                     </div>
+                </div>
+                <div className="flex flex-col md:flex-row gap-2">
+                    <div className="flex flex-col gap-1 w-full md:w-1/2">
+                        <label className="block text-xl md:text-sm font-medium text-black">
+                            Select Date
+                        </label>
+                        <input
+                            type="date"
+                            min={minDate}
+                            max={maxDate}
+                            {...register("date", { required: "Date is required" })}
+                            className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
+                        />
+                        {errors.date && (
+                            <p className="mt-1 text-sm text-red-600">{errors.date.message}</p>
+                        )}
+                    </div>
+                    <div className="flex flex-col gap-1 w-full md:w-1/2">
+                        <label className="block text-xl md:text-sm font-medium text-black">Time</label>
+                        <SelectOption selectOptionData={{ title: "Time", selectData: times, selectValue: setSelectTime }} />
+                    </div>
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
                         <label className="text-xs md:text-sm flex gap-1 items-center font-medium text-black">
                             <span className="text-black text-xl md:text-sm ml-1">Passenger</span>
@@ -510,6 +512,7 @@ const MainForm = () => {
                             ))}
                         </select>
                         {errors.passengers && <span className="text-red-500 text-xs">{errors.passengers.message}</span>}
+
                     </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-2">
@@ -520,6 +523,28 @@ const MainForm = () => {
                             className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
                         >
                             {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(num => (
+                                <option key={num} value={num}>{num}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="flex flex-col gap-1 w-full md:w-1/2">
+                        <label className="block text-xl md:text-sm font-medium text-black">Stop Over</label>
+                        <select
+                            {...register("stopover")}
+                            className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
+                        >
+                            {[0, 1, 2, 3, 4].map(num => (
+                                <option key={num} value={num}>{num}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="flex flex-col gap-1 w-full md:w-1/2">
+                        <label className="block text-xl md:text-sm font-medium text-black">Byke</label>
+                        <select
+                            {...register("byke")}
+                            className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
+                        >
+                            {[0, 1, 2, 3, 4].map(num => (
                                 <option key={num} value={num}>{num}</option>
                             ))}
                         </select>

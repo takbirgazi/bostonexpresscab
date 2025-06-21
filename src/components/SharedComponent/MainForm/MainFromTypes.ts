@@ -3,6 +3,8 @@ export type Inputs = {
     time: string;
     luggage: number;
     passengers: number;
+    stopover: number,
+    byke: number,
     children: number;
     childSeats: number;
     pickup: string;
