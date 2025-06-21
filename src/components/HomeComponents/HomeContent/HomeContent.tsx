@@ -8,7 +8,7 @@ import google_ratings from "@/assets/images/google_ratings.png";
 const HomeContent = () => {
     return (
         <div className="flex flex-col gap-8 py-8">
-            <div className="flex flex-col md:flex-row gap-8">
+            <div className="flex flex-col-reverse md:flex-row gap-8">
                 <div className="w-full md:w-3/4">
                     <h2 className="text-lg md:text-3xl text-mainColor font-bold font-lato pb-5">Need a Reliable Ride to or from Logan Airport? Book Boston Express Cab!</h2>
                     <div className="flex justify-center items-center">

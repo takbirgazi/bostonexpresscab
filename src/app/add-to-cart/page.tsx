@@ -295,7 +295,7 @@ export default function BookingSummaryPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 w-full mt-6 bg-mainColor hover-bg-mainColor text-white font-semibold py-3 rounded-md text-lg transition-all disabled:opacity-50"
+              className="px-5 w-full mt-6 bg-mainColor hover-bg-mainColor cursor-pointer text-white font-semibold py-3 rounded-md text-lg transition-all disabled:opacity-50"
             >
               {isSubmitting ? 'Processing...' : 'Continue to Payment'}
             </button>

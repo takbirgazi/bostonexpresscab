@@ -26,8 +26,10 @@ const MainForm = () => {
     const [airports, setAirports] = useState<AirportList[]>([]);
     const [selectedAirportName, setSelectedAirportName] = useState<AirportList>({
         id: 1,
-        place_id: "ChIJN0na1RRw44kRRFEtH8OUkww",
-        name: "Boston Logan International Airport (BOS)"
+        place_id: "",
+        name: ""
+        // place_id: "ChIJN0na1RRw44kRRFEtH8OUkww",
+        // name: "Boston Logan International Airport (BOS)"
     });
     const [catSeat, setCatSeat] = useState(0);
     const [catSeatTotal, setCatSeatTotal] = useState(0);
@@ -82,6 +84,8 @@ const MainForm = () => {
             byke: 0,
             children: 0,
             childSeats: 0,
+            pickup: "Boston Logan International Airport (BOS), East Boston, MA, USA",
+            dropoff: "Boston Logan International Airport (BOS), East Boston, MA, USA",
             luggage: 0,
         }
     });
@@ -109,6 +113,7 @@ const MainForm = () => {
                     // .sort((a, b) => b.id - a.id); // Sort descending by id
 
                     setAirports(sortedAirports);
+                    setSelectedAirportName(sortedAirports[0])
                 }
             })
             .catch(err => {
@@ -534,7 +539,7 @@ const MainForm = () => {
                         </select>
                     </div>
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
-                        <label className="block text-xl md:text-sm font-medium text-black">Byke</label>
+                        <label className="block text-xl md:text-sm font-medium text-black">Bike</label>
                         <select
                             {...register("byke")}
                             className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
