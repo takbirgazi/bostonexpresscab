@@ -64,8 +64,6 @@ const BlogPage = () => {
         <div className="bg-gradient-to-r from-blue-100 via-white to-blue-100">
             <PageHeader pageHeaderData={pageHeaderData} />
             <div className="max-w-7xl mx-auto px-4 py-10">
-                <h1 className="text-4xl font-bold mb-10 text-center">Latest Blog Posts</h1>
-
                 {loading ? (
                     <figure className='flex justify-center items-center'>
                         <Image width={50} height={50} src={loadingImage} alt="Loading..." />
