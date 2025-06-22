@@ -59,7 +59,7 @@ export default function BlogPage() {
                 if (!res.ok) return;
 
                 const data = await res.json();
-                setRecentPosts(data);
+                setRecentPosts(data.data);
             } catch (error) {
                 console.error("Error fetching recent posts:", error);
             }
@@ -130,7 +130,7 @@ export default function BlogPage() {
                     <div>
                         <h2 className="text-xl font-semibold border-b pb-2 mb-4">Recent Posts</h2>
                         <ul className="space-y-2">
-                            {recentPosts.slice(0, 5).map((post) => (
+                            {recentPosts?.map((post) => (
                                 <li key={post.id}>
                                     <Link
                                         href={`/blog/${post.id}`}
