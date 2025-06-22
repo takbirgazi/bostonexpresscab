@@ -47,7 +47,7 @@ const HomeContent = () => {
                                     <span className="font-semibold">Explore Boston:</span> City tours and local exploration with our reliable car service.
                                 </li>
                                 <li>
-                                    <span className="font-semibold">Long-Distance Travel:</span> Need a ride to New York, Cape Cod, <a target="_blank" href="/" className="text-mainColor underline  font-bold hover:text-black transition-colors duration-200">New Hampshire</a> or beyond? We offer long-distance trips too!</li>
+                                    <span className="font-semibold">Long-Distance Travel:</span> Need a ride to New York, Cape Cod, New Hampshire or beyond? We offer long-distance trips too!</li>
                                 <li>
                                     <span className="font-semibold">Special Events:</span> Comfortable transportation for parties, graduations, weddings, and more.
                                 </li>
@@ -64,7 +64,7 @@ const HomeContent = () => {
                             </p>
                             <div className="text-base md:text-lg text-gray-700 w-full">
                                 <ul className="list-disc pl-5 space-y-1 w-full">
-                                    <li className="w-full">Arlington, <a target="_blank" href="/" className="text-mainColor underline  font-bold hover:text-black transition-colors duration-200">Belmont Taxi</a>, Bedford</li>
+                                    <li className="w-full">Arlington, <a target="_blank" href="https://bostonexpresscab.com/belmont-ma-taxi-car-rental-8" className="text-mainColor underline  font-bold hover:text-black transition-colors duration-200">Belmont Taxi</a>, Bedford</li>
                                     <li className="w-full">Cambridge,Somerville,Medford</li>
                                     <li className="w-full">Boston,Lexington,Waltham</li>
                                     <li className="w-full">Stoneham,Brookline,Jamaica Plain</li>

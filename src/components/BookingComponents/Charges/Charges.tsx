@@ -29,7 +29,7 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                         <ChargeItem label="Distance" value={`${Math.round(Number(bookingData.distance))} Miles`} />
                     )}
                     {bookingData.distance_fare && Number(bookingData.distance_fare) > 0 && (
-                        <ChargeItem label="Distance Fare" value={`$ ${Math.round(Number(bookingData.distance_fare))}`} />
+                        <ChargeItem label="Fare" value={`$ ${Math.round(Number(bookingData.distance_fare))}`} />
                     )}
                     {bookingData.minimum_fare && Number(bookingData.minimum_fare) > 0 && (
                         <ChargeItem label="Minimum Fare" value={`$ ${Math.round(Number(bookingData.minimum_fare))}`} />
@@ -72,7 +72,7 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                         <ChargeItem label="Pets Sits Charge" value={`$ ${Math.round(Number(bookingData.additional_travel_detail.totalPetsFare))}`} />
                     )}
                     {bookingData.discountAmount && Number(bookingData.discountAmount) > 0 && (
-                        <ChargeItem label={`Discount ${Math.round(Number(bookingData.cash_discount_percentage || 0))}%`} value={`- $ ${Math.round(Number(bookingData.discountAmount))}`} />
+                        <ChargeItem label={`Discount ${Math.round(Number(bookingData.cash_discount_percentage || 0))}% on cash payment`} value={`- $ ${Math.round(Number(bookingData.discountAmount))}`} />
                     )}
                     {bookingData.total_fare && Number(bookingData.total_fare) > 0 && (
                         <div className="border-t pt-2 mt-2 text-lg font-semibold text-gray-900 flex justify-between">
