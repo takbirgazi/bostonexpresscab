@@ -75,7 +75,7 @@ const ServiceClient = ({ route }: { route: string }) => {
                             </span>
                         </span>
                     </div>
-                    <div className="py-4" dangerouslySetInnerHTML={{ __html: data.description }} />
+                    <div className="py-4 overflow-hidden" dangerouslySetInnerHTML={{ __html: data.description }} />
                 </div>
                 <div className="w-full md:w-6/12 md:-mt-14">
                     <MainForm />
