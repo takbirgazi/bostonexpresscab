@@ -70,6 +70,7 @@ const MainForm = () => {
     const [discountAmount, setDiscountAmount] = useState(0);
     const [extraLuggage, setExtraLuggage] = useState(0);
     const [minimumFare, setMinimumFare] = useState(0);
+    const [bikeCharge, setBikeCharge] = useState(0);
     const dispatch = useAppDispatch();
 
     const {
@@ -222,6 +223,8 @@ const MainForm = () => {
             // selected_airport_name: selectedVehicle === 1 ? dropoffInp : selectedVehicle === 2 ? pickupInp : "door_to_door",
             selected_airport_name: selectedAirportName ? selectedAirportName.name : "no name",
             time: selectTime || "",
+            stopOverNumber: String(watch("stopover")),
+            bikeNumber: String(watch("byke")),
         });
 
         console.log("Passengers:", String(watchedPassengers), "time:", String(selectTime), "distance:", String(distance), "selected_airport_name:", selectedAirportName?.name, "infantSeats:", String(infantSeats), "regularSeats:", String(regularSeats), "boosterSeats:", String(boosterSeats), "selected Location", data1, "luggage:", String(watchedLuggage));
@@ -258,6 +261,7 @@ const MainForm = () => {
                 setDiscountAmount(data?.discountAmount);
                 setExtraLuggage(data?.extra_luggage);
                 setMinimumFare(data?.minimumFare);
+                setBikeCharge(data?.bikeCharge);
             })
             .catch(err => console.error('API Error:', err));
     }, [watchedPassengers, selectTime, watchedLuggage, infantSeats, regularSeats, boosterSeats, distance, dropoffPlaceId, catSeat, dogSeat, selectedVehicle, pickupInp, dropoffInp, selectedAirportName, watch]);
@@ -307,6 +311,7 @@ const MainForm = () => {
                     discountAmount: discountAmount,
                     extra_luggage: extraLuggage,
                     minimum_fare: minimumFare,
+                    bike_charge: bikeCharge,
                     additional_travel_detail: {
                         below_24_month_seat_number: infantSeats,
                         two_yrs_to_five_yrs_seat_number: regularSeats,
@@ -561,6 +566,14 @@ const MainForm = () => {
                             </select>
                         </div>
                     )}
+                    {
+                        childSeatsCount > 0 && <button
+                            type="button"
+                            onClick={toggleAdditionalOptions}
+                            className={`${showAdditionalOptions ? "text-white bg-mainColor" : "text-mainColor bg-transparent"} w-full text-sm  font-bold py-2 px-4 rounded border border-mainColor hover:bg-mainColor hover:text-white transition-colors duration-300 cursor-pointer md:hidden block`} >
+                            {showAdditionalOptions ? 'Hide Child Seat Options' : 'Add Child Seat'}
+                        </button>
+                    }
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
                         <label className="block text-xl md:text-sm font-medium text-black">Stop Over</label>
                         <select
@@ -596,7 +609,7 @@ const MainForm = () => {
                         childSeatsCount > 0 && <button
                             type="button"
                             onClick={toggleAdditionalOptions}
-                            className={`${showAdditionalOptions ? "text-white bg-mainColor" : "text-mainColor bg-transparent"} w-full text-sm  font-bold py-2 px-4 rounded border border-mainColor hover:bg-mainColor hover:text-white transition-colors duration-300 cursor-pointer`} >
+                            className={`${showAdditionalOptions ? "text-white bg-mainColor" : "text-mainColor bg-transparent"} w-full text-sm  font-bold py-2 px-4 rounded border border-mainColor hover:bg-mainColor hover:text-white transition-colors duration-300 cursor-pointer hidden md:block`} >
                             {showAdditionalOptions ? 'Hide Child Seat Options' : 'Add Child Seat'}
                         </button>
                     }
@@ -605,7 +618,7 @@ const MainForm = () => {
                 {childSeatsCount > 0 && (
                     <div className="bg-white rounded relative">
                         {showAdditionalOptions && (
-                            <div className="absolute z-10 transition-all duration-500 bg-white w-full border border-gray-200 rounded p-4 mt-3 space-y-4">
+                            <div className="absolute z-10 -top-[200px] md:top-0 transition-all duration-500 bg-white w-80 md:w-full border border-gray-200 rounded p-4 mt-3 space-y-4">
                                 <div className="space-y-3">
                                     <div className="flex items-center justify-between">
                                         <div>
