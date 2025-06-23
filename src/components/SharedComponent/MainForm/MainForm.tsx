@@ -220,7 +220,7 @@ const MainForm = () => {
             luggage_number: String(watchedLuggage),
             selected_location: selectedVehicle === 1 ? "from_airport" : selectedVehicle === 2 ? "to_airport" : "door_to_door",
             // selected_airport_name: selectedVehicle === 1 ? dropoffInp : selectedVehicle === 2 ? pickupInp : "door_to_door",
-            selected_airport_name: selectedAirportName ? selectedAirportName.name : "",
+            selected_airport_name: selectedAirportName ? selectedAirportName.name : "no name",
             time: selectTime || "",
         });
 
@@ -294,7 +294,7 @@ const MainForm = () => {
                     luggage_charge: luggageCharge.toString(),
                     distance: (distance ?? 0).toString(),
                     selected_location: selectedVehicle === 1 ? "from_airport" : selectedVehicle === 2 ? "to_airport" : "door_to_door",
-                    airport_toll: airportToll,
+                    airport_toll: airportToll.toString(),
                     airport_parking_toll: parkingToll,
                     distance_fare: distanceFare,
                     gratuity: gratuity.toString(),
@@ -327,7 +327,7 @@ const MainForm = () => {
                     },
                     body: JSON.stringify(payload),
                 });
-
+                console.log("response", response)
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
