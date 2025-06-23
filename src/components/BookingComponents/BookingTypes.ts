@@ -25,6 +25,7 @@ export interface BookingTypes {
     rush_hour_charge: string,
     extra_luggage: string,
     stop_over_charge: string,
+    bike_charge: string,
     snow_strom_charge: string,
     distance_fare: string,
     discountAmount: string,
