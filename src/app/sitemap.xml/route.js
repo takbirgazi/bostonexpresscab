@@ -31,15 +31,15 @@ export async function GET() {
     const blogData = await blogResponse.json();
     blogPosts = blogData.data || [];
 
-    const servicesResponse = await fetch('https://admin.bostonexpresscab.com/api/cities', {
+    const servicesResponse = await fetch('https://admin.bostonexpresscab.com/api/service-posts', {
       headers: {
         Accept: 'application/json',
       },
-      next: { revalidate: 60 }, 
+      next: { revalidate: 60 },
     });
 
     const servicesData = await servicesResponse.json();
-    services = servicesData.data || [];
+    services = servicesData || [];
 
   } catch (error) {
     console.error('Error fetching blog/service data:', error);
@@ -57,7 +57,7 @@ export async function GET() {
       priority: 0.8,
     })),
     ...services.map(service => ({
-      loc: `${service.url}`,
+      loc: `https://bostonexpresscab.com/${service.slug}`,
       lastmod: new Date().toISOString(),
       priority: 0.8,
     })),
