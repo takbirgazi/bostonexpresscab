@@ -208,6 +208,10 @@ const MainForm = () => {
     const watchedPassengers = watch("passengers");
     const watchedLuggage = watch("luggage");
 
+    // Extract complex expressions to variables for useEffect dependencies
+    const watchedStopover = watch("stopover");
+    const watchedByke = watch("byke");
+
     useEffect(() => {
         const data1 = selectedVehicle === 1 ? "from_airport" : selectedVehicle === 2 ? "to_airport" : "door_to_door";
         const params = new URLSearchParams({
@@ -223,11 +227,11 @@ const MainForm = () => {
             // selected_airport_name: selectedVehicle === 1 ? dropoffInp : selectedVehicle === 2 ? pickupInp : "door_to_door",
             selected_airport_name: selectedAirportName ? selectedAirportName.name : "no name",
             time: selectTime || "",
-            stopOverNumber: String(watch("stopover")),
-            bikeNumber: String(watch("byke")),
+            stop_over_number: String(watchedStopover),
+            bike_number: String(watchedByke),
         });
 
-        console.log("Passengers:", String(watchedPassengers), "time:", String(selectTime), "distance:", String(distance), "selected_airport_name:", selectedAirportName?.name, "infantSeats:", String(infantSeats), "regularSeats:", String(regularSeats), "boosterSeats:", String(boosterSeats), "selected Location", data1, "luggage:", String(watchedLuggage));
+        console.log("Passengers:", String(watchedPassengers), "time:", String(selectTime), "distance:", String(distance), "selected_airport_name:", selectedAirportName?.name, "infantSeats:", String(infantSeats), "regularSeats:", String(regularSeats), "boosterSeats:", String(boosterSeats), "selected Location", data1, "luggage:", String(watchedLuggage), "Strop Over", String(watchedStopover), "Bike", String(watchedByke));
 
         fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/fare?` + params)
             .then(res => res.json())
@@ -264,7 +268,7 @@ const MainForm = () => {
                 setBikeCharge(data?.bikeCharge);
             })
             .catch(err => console.error('API Error:', err));
-    }, [watchedPassengers, selectTime, watchedLuggage, infantSeats, regularSeats, boosterSeats, distance, dropoffPlaceId, catSeat, dogSeat, selectedVehicle, pickupInp, dropoffInp, selectedAirportName, watch]);
+    }, [watchedPassengers, selectTime, watchedLuggage, infantSeats, regularSeats, boosterSeats, distance, dropoffPlaceId, catSeat, dogSeat, selectedVehicle, pickupInp, dropoffInp, selectedAirportName, watchedStopover, watchedByke, watch]);
 
     const toggleAdditionalOptions = () => {
         setShowAdditionalPetsOptions(false);
