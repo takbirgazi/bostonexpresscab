@@ -53,6 +53,7 @@ export default function BookingSummaryPage() {
     rush_hour_charge: '',
     extra_luggage: '',
     stop_over_charge: '',
+    bike_charge: '',
     snow_strom_charge: '',
     distance_fare: '',
     discountAmount: '',
