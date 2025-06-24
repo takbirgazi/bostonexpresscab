@@ -16,6 +16,7 @@ import { calculateDistance } from "@/app/utils/calculateDistance";
 import { useAppDispatch } from "@/lib/hooks";
 import { setFrom } from "@/lib/features/formdata/formdataSlice";
 import { AirportList, Inputs, PlaceSelectHandler } from "./MainFromTypes";
+import CustomDatePicker from "./CustomDatePicker/CustomDatePicker";
 
 
 const MainForm = () => {
@@ -28,8 +29,6 @@ const MainForm = () => {
         id: 1,
         place_id: "",
         name: ""
-        // place_id: "ChIJN0na1RRw44kRRFEtH8OUkww",
-        // name: "Boston Logan International Airport (BOS)"
     });
     const [catSeat, setCatSeat] = useState(0);
     const [catSeatTotal, setCatSeatTotal] = useState(0);
@@ -77,6 +76,7 @@ const MainForm = () => {
         register,
         handleSubmit,
         watch,
+        control,
         formState: { errors },
     } = useForm<Inputs>({
         defaultValues: {
@@ -96,9 +96,8 @@ const MainForm = () => {
     const childSeatsCount = watch("childSeats");
     // Date handling
     const today = useMemo(() => new Date(), []);
-    const minDate = format(today, 'yyyy-MM-dd');
-    const maxDate = format(addDays(today, 90), 'yyyy-MM-dd'); // Allow booking up to 90 days in advance
-
+    const minDate = today;
+    const maxDate = addDays(today, 90); // Allow booking up to 90 days in advance
     // Sample airport data - replace with your actual airport data
     useEffect(() => {
         fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/airports`)
@@ -252,8 +251,8 @@ const MainForm = () => {
                 setAdditionalPetsTotal(data.totalPetsFare);
                 setCatSeatTotal(data?.catSeatFare);
                 setDogSeatTotal(data?.dogSeatFare);
-                setParkingToll(data?.airport_toll);
-                setAirportToll(data?.parking_toll);
+                setParkingToll(data?.parking_toll);
+                setAirportToll(data?.airport_toll);
                 setDistanceFare(data?.distance_fare);
                 setGratuity(data?.gratuity);
                 setGratuityPercentage(data?.gratuity_percentage);
@@ -393,7 +392,6 @@ const MainForm = () => {
     }, [pickupPlaceId, dropoffPlaceId, changeDropoff, changePickup]);
 
     console.log(distance);
-    console.log(watch("pickup"))
     return (
         <div className="bg-white rounded p-7 w-full shadow-sm border border-mainColor">
             <figure className="-mt-[22%] md:-mt-[94px] pb-2">
@@ -486,13 +484,7 @@ const MainForm = () => {
                         <label className="block text-xl md:text-sm font-medium text-black">
                             Select Date
                         </label>
-                        <input
-                            type="date"
-                            min={minDate}
-                            max={maxDate}
-                            {...register("date", { required: "Date is required" })}
-                            className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
-                        />
+                        <CustomDatePicker control={control} name="date" minDate={minDate} maxDate={maxDate} />
                         {errors.date && (
                             <p className="mt-1 text-sm text-red-600">{errors.date.message}</p>
                         )}
