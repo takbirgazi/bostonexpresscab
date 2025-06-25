@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'apis.bostonexpresscab.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'admin.bostonexpresscab.com',
       },
     ],
