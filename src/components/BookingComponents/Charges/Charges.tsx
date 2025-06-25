@@ -12,7 +12,7 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
     const [carImage, setCarImage] = useState<string | null>(null);
 
     useEffect(() => {
-        fetch(`https://apis.bostonexpresscab.com/api/car-photo/${(bookingData.vehicle_name).split(" ")[0]}`)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/car-photo/${(bookingData.vehicle_name).split(" ")[0]}`)
             .then(response => response.json())
             .then(data => {
                 setCarImage(("https://apis.bostonexpresscab.com/" + data.photo) || null);
