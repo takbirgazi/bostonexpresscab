@@ -29,6 +29,7 @@ export interface BookingTypes {
     snow_strom_charge: string,
     distance_fare: string,
     discountAmount: string,
+    fare_after_discount: string,
     cash_discount_percentage: string,
     additional_travel_detail: {
         extraSeatFare: string,

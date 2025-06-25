@@ -57,6 +57,7 @@ export default function BookingSummaryPage() {
     snow_strom_charge: '',
     distance_fare: '',
     discountAmount: '',
+    fare_after_discount: '',
     cash_discount_percentage: '',
     additional_travel_detail: {
       extraSeatFare: '',

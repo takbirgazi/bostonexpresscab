@@ -74,15 +74,31 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                     {bookingData.bike_charge && Number(bookingData.bike_charge) > 0 && (
                         <ChargeItem label="Bike Charge" value={`$ ${Math.round(Number(bookingData.bike_charge))}`} />
                     )}
-                    {bookingData.discountAmount && Number(bookingData.discountAmount) > 0 && (
+                    {/* {bookingData.discountAmount && Number(bookingData.discountAmount) > 0 && (
                         <ChargeItem label={`Discount ${Math.round(Number(bookingData.cash_discount_percentage || 0))}% on cash payment`} value={`- $ ${Math.round(Number(bookingData.discountAmount))}`} />
-                    )}
+                    )} */}
                     {bookingData.total_fare && Number(bookingData.total_fare) > 0 && (
                         <div className="border-t pt-2 mt-2 text-lg font-semibold text-gray-900 flex justify-between">
                             <span>Total</span>
                             <span>{`$ ${Math.round(Number(bookingData.total_fare))}`}</span>
                         </div>
                     )}
+                    <div className="bg-gray-50 rounded-xl p-4 mt-4 shadow-sm">
+                        {bookingData.discountAmount && Number(bookingData.discountAmount) > 0 && (
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-sm text-green-700 font-medium">
+                                    {`Discount${bookingData.cash_discount_percentage ? ` (${Math.round(Number(bookingData.cash_discount_percentage))}% on cash)` : ""}`}
+                                </span>
+                                <span className="text-sm text-green-700 font-semibold">
+                                    {`- $${Math.round(Number(bookingData.discountAmount))}`}
+                                </span>
+                            </div>
+                        )}
+                        <div className="border-t border-dashed border-gray-300 pt-3 mt-3 flex items-center justify-between">
+                            <span className="text-base font-bold text-gray-800">Total</span>
+                            <span className="text-xl font-extrabold text-mainColor">{`$${Math.round(Number(bookingData.fare_after_discount))}`}</span>
+                        </div>
+                    </div>
                 </div>
             </> : <h2 className="text-center font-bold text-2xl py-4">No data Found</h2>
 
