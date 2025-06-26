@@ -27,7 +27,7 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                 console.error("Failed to fetch car image:", error);
                 setCarImage(null);
             });
-    }, [bookingData]);
+    }, [passenger]);
 
     return (
         <div className="bg-white p-6 rounded-3xl shadow-md border-t-[6px] border-mainColor space-y-4">
