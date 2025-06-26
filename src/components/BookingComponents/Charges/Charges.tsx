@@ -25,7 +25,6 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
             {bookingData.uuid ? <>
                 <div className="rounded-2xl flex justify-center items-center">
                     <figure>
-                        {/* <Image className="h-full max-h-40 rounded-md w-full object-cover" src={Number(bookingData.passenger) < 4 ? car_1 : (Number(bookingData.passenger) >= 4 && Number(bookingData.passenger) <= 6) ? car_2 : car_3} alt="Trip Summary" /> */}
                         {
                             carImage ? <Image className="h-full max-h-40 rounded-md w-full object-cover" height={160} width={256} src={carImage} alt="Trip Summary" /> : ""
                         }
@@ -41,16 +40,12 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                     {bookingData.distance_fare && Number(bookingData.distance_fare) > 0 && (
                         <ChargeItem label="Fare" value={`$ ${(Math.round(Number(bookingData.distance_fare)) > Math.round(Number(bookingData.minimum_fare)) ? Math.round(Number(bookingData.distance_fare)) : Math.round(Number(bookingData.minimum_fare)))}`} />
                     )}
-                    {/* {bookingData.minimum_fare && Number(bookingData.minimum_fare) > 0 && (
-                        <ChargeItem label="Minimum Fare" value={`$ ${Math.round(Number(bookingData.minimum_fare))}`} />
-                    )} */}
                     {bookingData.airport_toll && Number(bookingData.airport_toll) > 0 && (
                         <ChargeItem label="Airport Toll" value={`$ ${Math.round(Number(bookingData.airport_toll))}`} />
                     )}
                     {bookingData.airport_parking_toll && Number(bookingData.airport_parking_toll) > 0 && (
                         <ChargeItem label="Airport Parking Toll" value={`$ ${Math.round(Number(bookingData.airport_parking_toll))}`} />
                     )}
-                    {/* <ChargeItem label="Parking Toll" value={`$ ${bookingData.parking_toll || 0}`} /> */}
                     {bookingData.gratuity && Number(bookingData.gratuity) > 0 && (
                         <ChargeItem label={`Gratuity ${Math.round(Number(bookingData.gratuity_percentage || 0))}%`} value={`$ ${Math.round(Number(bookingData.gratuity) || 0)}`} />
                     )}
