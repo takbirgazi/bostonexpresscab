@@ -36,6 +36,9 @@ export interface BookingTypes {
     additional_travel_detail: {
         extraSeatFare: string,
         totalPetsFare: string,
+        below_24_month_seat_number: number,
+        five_yrs_to_eight_yrs_seat_number: number,
+        two_yrs_to_five_yrs_seat_number: number
     },
     minimum_fare: string,
 }

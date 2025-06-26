@@ -10,12 +10,22 @@ interface Charge {
 
 const Charges: React.FC<Charge> = ({ bookingData }) => {
     const [carImage, setCarImage] = useState<string | null>(null);
-
+    const passenger = (bookingData.additional_travel_detail.below_24_month_seat_number) + (bookingData.additional_travel_detail.five_yrs_to_eight_yrs_seat_number) + (bookingData.additional_travel_detail.two_yrs_to_five_yrs_seat_number) + bookingData.passenger;
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/car-photo/${(bookingData.vehicle_name).split(" ")[0]}`)
-            .then(response => response.json())
+        // fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/car-photo/${(bookingData.vehicle_name).split(" ")[0]}`)
+        fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/car-photo/${passenger}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
             .then(data => {
                 setCarImage(("https://apis.bostonexpresscab.com/" + data.photo) || null);
+            })
+            .catch(error => {
+                console.error("Failed to fetch car image:", error);
+                setCarImage(null);
             });
     }, [bookingData]);
 
@@ -24,11 +34,13 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
             <h3 className="text-lg font-bold text-gray-800">Charges</h3>
             {bookingData.uuid ? <>
                 <div className="rounded-2xl flex justify-center items-center">
-                    <figure>
-                        {
-                            carImage ? <Image className="h-full max-h-40 rounded-md w-full object-cover" height={160} width={256} src={carImage} alt="Trip Summary" /> : ""
-                        }
-                    </figure>
+                    {
+                        carImage && <figure>
+                            {
+                                carImage ? <Image className="h-full max-h-40 rounded-md w-full object-cover" height={160} width={256} src={carImage} alt="Trip Summary" /> : ""
+                            }
+                        </figure>
+                    }
                 </div>
                 <div className="text-sm text-gray-700 space-y-1">
                     {bookingData.vehicle_name && (
