@@ -59,6 +59,8 @@ export default function BookingSummaryPage() {
     discountAmount: '',
     fare_after_discount: '',
     cash_discount_percentage: '',
+    extra_charge_of_city:'',
+    extra_toll_of_city: '',
     additional_travel_detail: {
       extraSeatFare: '',
       totalPetsFare: '',

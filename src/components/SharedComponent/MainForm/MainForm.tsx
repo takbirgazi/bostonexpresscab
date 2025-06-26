@@ -71,6 +71,9 @@ const MainForm = () => {
     const [minimumFare, setMinimumFare] = useState(0);
     const [bikeCharge, setBikeCharge] = useState(0);
     const [fareAfterDiscount, setFareAfterDiscount] = useState(0);
+    const [extraChargeCity, setExtraChargeCity] = useState(0);
+    const [extraTollOfCity, setExtraTollOfCity] = useState(0); 
+    
     const dispatch = useAppDispatch();
 
     const {
@@ -268,6 +271,8 @@ const MainForm = () => {
                 setMinimumFare(data?.minimumFare);
                 setBikeCharge(data?.bikeCharge);
                 setFareAfterDiscount(data?.fareAfterDiscount);
+                setExtraChargeCity(data?.extraChargeOfCity);
+                setExtraTollOfCity(data?.extraTollOfCity);
             })
             .catch(err => console.error('API Error:', err));
     }, [watchedPassengers, selectTime, watchedLuggage, infantSeats, regularSeats, boosterSeats, distance, dropoffPlaceId, catSeat, dogSeat, selectedVehicle, pickupInp, dropoffInp, selectedAirportName, watchedStopover, watchedByke, watch]);
@@ -319,6 +324,8 @@ const MainForm = () => {
                     minimum_fare: minimumFare,
                     bike_charge: bikeCharge,
                     fare_after_discount: fareAfterDiscount,
+                    extra_charge_of_city: extraChargeCity,
+                    extra_toll_of_city: extraTollOfCity,
                     additional_travel_detail: {
                         below_24_month_seat_number: infantSeats,
                         two_yrs_to_five_yrs_seat_number: regularSeats,

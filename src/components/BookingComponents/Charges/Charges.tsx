@@ -60,6 +60,12 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                     {bookingData.night_charge && Number(bookingData.night_charge) > 0 && (
                         <ChargeItem label="Night Charge" value={`$ ${Math.round(Number(bookingData.night_charge))}`} />
                     )}
+                    {bookingData.night_charge && Number(bookingData.night_charge) > 0 && (
+                        <ChargeItem label="Extra Charge Of City" value={`$ ${Math.round(Number(bookingData.extra_charge_of_city))}`} />
+                    )}
+                    {bookingData.night_charge && Number(bookingData.night_charge) > 0 && (
+                        <ChargeItem label="Extra Toll Of City" value={`$ ${Math.round(Number(bookingData.extra_toll_of_city))}`} />
+                    )}
                     {bookingData.hidden_night_charge && Number(bookingData.hidden_night_charge) > 0 && (
                         <ChargeItem label="Hidden Night Charge" value={`$ ${Math.round(Number(bookingData.hidden_night_charge))}`} />
                     )}

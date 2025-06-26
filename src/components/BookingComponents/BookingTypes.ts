@@ -31,6 +31,8 @@ export interface BookingTypes {
     discountAmount: string,
     fare_after_discount: string,
     cash_discount_percentage: string,
+    extra_charge_of_city: string,
+    extra_toll_of_city: string,
     additional_travel_detail: {
         extraSeatFare: string,
         totalPetsFare: string,
