@@ -409,7 +409,7 @@ const MainForm = () => {
                 <Image className="h-full w-full object-cover scale-110" src={formHeader} alt="Form Header" width={800} height={200} />
             </figure>
             <div className="w-full flex flex-col">
-                <p className="font-bold">INSTANT RESERVATIONS</p>
+                <span className="font-bold">INSTANT RESERVATIONS</span>
                 <div className="gap-2 w-full flex justify-between items-center pt-3">
                     {vehicles.map(vehicle => (
                         <div
