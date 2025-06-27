@@ -94,7 +94,7 @@ const HomeContent = () => {
                                     <li className="w-full">
                                         West Roxbury,{" "}
                                         Burlington,{" "}
-                                        <a target="_blank" href="https://bostonexpresscab.com/woburn-ma-taxi-15" className="text-mainColor underline font-bold hover:text-black transition-colors duration-200">Woburn</a>
+                                        <a target="_blank" href="https://bostonexpresscab.com/woburn-ma-taxi-15" className="text-mainColor underline font-bold hover:text-black transition-colors duration-200">Woburn</a>,{" "}
                                         <a target="_blank" href="https://bostonexpresscab.com/andover-ma-airport-taxi-24" className="text-mainColor underline font-bold hover:text-black transition-colors duration-200">Andover</a>
                                     </li>
                                     <li className="w-full">
