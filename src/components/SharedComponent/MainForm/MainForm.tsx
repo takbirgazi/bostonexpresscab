@@ -72,8 +72,8 @@ const MainForm = () => {
     const [bikeCharge, setBikeCharge] = useState(0);
     const [fareAfterDiscount, setFareAfterDiscount] = useState(0);
     const [extraChargeCity, setExtraChargeCity] = useState(0);
-    const [extraTollOfCity, setExtraTollOfCity] = useState(0); 
-    
+    const [extraTollOfCity, setExtraTollOfCity] = useState(0);
+
     const dispatch = useAppDispatch();
 
     const {
@@ -335,6 +335,11 @@ const MainForm = () => {
                         extraSeatFare: additionalOptionsTotal,
                         totalPetsFare: additionalPetsTotal,
                     }
+                };
+                if (Number(infantSeats + regularSeats + boosterSeats) !== Number(data.childSeats)) {
+                    toast.error('Child seats is not matching with the selected seats.');
+                    setIsSubmitting(false);
+                    return;
                 };
 
                 console.log("Submitting payload:", payload);

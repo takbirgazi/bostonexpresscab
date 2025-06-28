@@ -1,6 +1,6 @@
 "use client";
 import PageHeader from "@/components/SharedComponent/PageHeader/PageHeader";
-import pageHeaderBg from "@/assets/images/pageHeadearBg.jpg";
+import pageHeaderBg from "@/assets/images/headerBg.png";
 import MainForm from "@/components/SharedComponent/MainForm/MainForm";
 import PopularCities from "@/components/HomeComponents/PopularCities/PopularCities";
 import Reviews from "@/components/HomeComponents/Reviews/Reviews";

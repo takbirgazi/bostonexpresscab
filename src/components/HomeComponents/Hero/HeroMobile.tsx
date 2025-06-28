@@ -1,6 +1,6 @@
 import MainForm from '@/components/SharedComponent/MainForm/MainForm';
 import PageHeader from '@/components/SharedComponent/PageHeader/PageHeader';
-import heroBg from "@/assets/images/heroBg2.jpg";
+import heroBg from "@/assets/images/headerBg.png";
 
 const HeroMobile = () => {
     const pageHeading = {

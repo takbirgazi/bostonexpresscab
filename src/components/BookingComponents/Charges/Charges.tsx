@@ -10,10 +10,13 @@ interface Charge {
 
 const Charges: React.FC<Charge> = ({ bookingData }) => {
     const [carImage, setCarImage] = useState<string | null>(null);
-    const passenger = (bookingData.additional_travel_detail.below_24_month_seat_number) + (bookingData.additional_travel_detail.five_yrs_to_eight_yrs_seat_number) + (bookingData.additional_travel_detail.two_yrs_to_five_yrs_seat_number) + bookingData.passenger;
+    const vehicleKey = bookingData.vehicle_name ? (bookingData.vehicle_name).split(" ")[0] : "";
     useEffect(() => {
-        // fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/car-photo/${(bookingData.vehicle_name).split(" ")[0]}`)
-        fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/car-photo/${passenger}`)
+        if (!vehicleKey) {
+            setCarImage(null);
+            return;
+        }
+        fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/car-photo/${vehicleKey}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
@@ -27,7 +30,7 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                 console.error("Failed to fetch car image:", error);
                 setCarImage(null);
             });
-    }, [passenger]);
+    }, [vehicleKey]);
 
     return (
         <div className="bg-white p-6 rounded-3xl shadow-md border-t-[6px] border-mainColor space-y-4">
@@ -37,7 +40,7 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                     {
                         carImage && <figure>
                             {
-                                carImage ? <Image className="h-full max-h-40 rounded-md w-full object-cover" height={160} width={256} src={carImage} alt="Trip Summary" /> : ""
+                                carImage ? <Image className="h-full max-h-40 rounded-md w-auto object-cover" height={160} width={256} src={carImage} alt="Trip Summary" /> : ""
                             }
                         </figure>
                     }
@@ -56,10 +59,10 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                         <ChargeItem label="Airport Toll" value={`$ ${Math.round(Number(bookingData.airport_toll))}`} />
                     )}
                     {bookingData.airport_parking_toll && Number(bookingData.airport_parking_toll) > 0 && (
-                        <ChargeItem label="Airport Parking Toll" value={`$ ${Math.round(Number(bookingData.airport_parking_toll))}`} />
+                        <ChargeItem label="Airport Parking Charge" value={`$ ${Math.round(Number(bookingData.airport_parking_toll))}`} />
                     )}
                     {bookingData.extra_charge_of_city && Number(bookingData.extra_charge_of_city) > 0 && (
-                        <ChargeItem label="Extra Charge Of City" value={`$ ${Math.round(Number(bookingData.extra_charge_of_city))}`} />
+                        <ChargeItem label="Extra Charge" value={`$ ${Math.round(Number(bookingData.extra_charge_of_city))}`} />
                     )}
                     {bookingData.extra_toll_of_city && Number(bookingData.extra_toll_of_city) > 0 && (
                         <ChargeItem label="Extra Toll Of City" value={`$ ${Math.round(Number(bookingData.extra_toll_of_city))}`} />
@@ -89,10 +92,10 @@ const Charges: React.FC<Charge> = ({ bookingData }) => {
                         <ChargeItem label="Snow Storm Charge" value={`$ ${Math.round(Number(bookingData.snow_strom_charge))}`} />
                     )}
                     {bookingData.additional_travel_detail?.extraSeatFare && Number(bookingData.additional_travel_detail.extraSeatFare) > 0 && (
-                        <ChargeItem label="Child Sits Charge" value={`$ ${Math.round(Number(bookingData.additional_travel_detail.extraSeatFare))}`} />
+                        <ChargeItem label="Child Seats Charge" value={`$ ${Math.round(Number(bookingData.additional_travel_detail.extraSeatFare))}`} />
                     )}
                     {bookingData.additional_travel_detail?.totalPetsFare && Number(bookingData.additional_travel_detail.totalPetsFare) > 0 && (
-                        <ChargeItem label="Pets Sits Charge" value={`$ ${Math.round(Number(bookingData.additional_travel_detail.totalPetsFare))}`} />
+                        <ChargeItem label="Pets Seats Charge" value={`$ ${Math.round(Number(bookingData.additional_travel_detail.totalPetsFare))}`} />
                     )}
                     {bookingData.bike_charge && Number(bookingData.bike_charge) > 0 && (
                         <ChargeItem label="Bike Charge" value={`$ ${Math.round(Number(bookingData.bike_charge))}`} />
