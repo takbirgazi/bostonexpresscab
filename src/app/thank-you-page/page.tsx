@@ -2,6 +2,8 @@
 import Link from 'next/link';
 
 export default function ThankYouPage() {
+
+    
     return (
         <main className='min-h-screen bg-[#ffffff]'>
             <div className='h-[90px] bg-gray-700'></div>

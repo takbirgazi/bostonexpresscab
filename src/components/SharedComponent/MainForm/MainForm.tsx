@@ -222,6 +222,7 @@ const MainForm = () => {
             distance: distance !== null ? String(distance) : "0",
             infant_extra_seat: String(infantSeats),
             regular_extra_seat: String(regularSeats),
+            children: String(childrenCount),
             booster_extra_seat: String(boosterSeats),
             cat_seat_number: String(catSeat),
             dog_seat_number: String(dogSeat),
@@ -275,7 +276,7 @@ const MainForm = () => {
                 setExtraTollOfCity(data?.extraTollOfCity);
             })
             .catch(err => console.error('API Error:', err));
-    }, [watchedPassengers, selectTime, watchedLuggage, infantSeats, regularSeats, boosterSeats, distance, dropoffPlaceId, catSeat, dogSeat, selectedVehicle, pickupInp, dropoffInp, selectedAirportName, watchedStopover, watchedByke, watch]);
+    }, [watchedPassengers, selectTime, watchedLuggage, infantSeats, regularSeats, boosterSeats, distance, dropoffPlaceId, catSeat, dogSeat, selectedVehicle, pickupInp, dropoffInp, selectedAirportName, watchedStopover, watchedByke, childrenCount, watch]);
 
     const toggleAdditionalOptions = () => {
         setShowAdditionalPetsOptions(false);
