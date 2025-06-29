@@ -1,27 +1,34 @@
 "use client"
 import { useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function ThankYouPage() {
 
     const fromData = useAppSelector(state => state.formData);
     const uuid = fromData.usrId;
+    const [invoice, setInvoice] = useState("")
     console.log(uuid)
 
     const handleDownload = async () => {
-        const response = await fetch('https://admin.bostonexpresscab.com/invoice-pdf', {
+        console.log(JSON.stringify({
+            uuid: uuid,
+        }))
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/invoice-pdf`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                uuid,
+                uuid: "2ea81fa8-47b9-4b75-958d-d89376a0a9fb",
             }),
         });
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
+        console.log(response)
         const result = await response.json();
+        // setInvoice(result);
         console.log("API Response:", result);
     }
 
