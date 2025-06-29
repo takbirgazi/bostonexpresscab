@@ -1,13 +1,13 @@
 "use client"
 import { useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export default function ThankYouPage() {
 
     const fromData = useAppSelector(state => state.formData);
     const uuid = fromData.usrId;
-    const [invoice, setInvoice] = useState("")
+    // const [invoice, setInvoice] = useState("")
     console.log(uuid)
 
     const handleDownload = async () => {
