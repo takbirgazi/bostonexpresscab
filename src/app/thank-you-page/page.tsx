@@ -11,26 +11,38 @@ export default function ThankYouPage() {
     console.log(uuid)
 
     const handleDownload = async () => {
-        console.log(JSON.stringify({
-            uuid: uuid,
-        }))
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/invoice-pdf`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                uuid: "2ea81fa8-47b9-4b75-958d-d89376a0a9fb",
-            }),
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/invoice-pdf`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    uuid: uuid, // <-- use actual UUID
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const blob = await response.blob(); // Handle response as a blob (PDF)
+            const url = window.URL.createObjectURL(blob);
+
+            // Create a temporary anchor tag to download the PDF
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'invoice.pdf'; // Set your filename here
+            document.body.appendChild(a);
+            a.click();
+
+            // Clean up
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Download failed:', error);
         }
-        console.log(response)
-        const result = await response.json();
-        // setInvoice(result);
-        console.log("API Response:", result);
-    }
+    };
 
     return (
         <main className='min-h-screen bg-[#ffffff]'>
