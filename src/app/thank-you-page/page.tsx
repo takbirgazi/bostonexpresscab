@@ -1,9 +1,30 @@
-// app/thank-you/page.tsx
+"use client"
+import { useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
 
 export default function ThankYouPage() {
 
-    
+    const fromData = useAppSelector(state => state.formData);
+    const uuid = fromData.usrId;
+    console.log(uuid)
+
+    const handleDownload = async () => {
+        const response = await fetch('https://admin.bostonexpresscab.com/invoice-pdf', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                uuid,
+            }),
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("API Response:", result);
+    }
+
     return (
         <main className='min-h-screen bg-[#ffffff]'>
             <div className='h-[90px] bg-gray-700'></div>
@@ -28,7 +49,7 @@ export default function ThankYouPage() {
 
                     <div className="mt-6 flex gap-2 items-center justify-center">
                         <Link href="/" className="inline-block bg-mainColor text-white font-semibold px-6 py-1.5 rounded transition" >Back to Home </Link>
-                        <a download className="inline-block bg-mainColor text-white font-semibold px-6 py-1.5 rounded cursor-pointer transition">Download</a>
+                        <a onClick={handleDownload} download className="inline-block bg-mainColor text-white font-semibold px-6 py-1.5 rounded cursor-pointer transition">Download</a>
                     </div>
                 </div>
             </div>

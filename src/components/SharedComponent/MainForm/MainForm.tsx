@@ -236,7 +236,7 @@ const MainForm = () => {
             bike_number: String(watchedByke),
         });
 
-        console.log("Passengers:", String(watchedPassengers), "time:", String(selectTime), "distance:", String(distance), "selected_airport_name:", ((selectedVehicle == 1) ? selectedAirportName.name : pickupInp), "destination_location:", ((selectedVehicle == 2) ? selectedAirportName.name : dropoffInp), "infantSeats:", String(infantSeats), "regularSeats:", String(regularSeats), "boosterSeats:", String(boosterSeats), "selected Location", data1, "luggage:", String(watchedLuggage), "Strop Over", String(watchedStopover), "Bike", String(watchedByke));
+        console.log("Passengers:", String(watchedPassengers), "time:", String(selectTime), "distance:", String(distance), "selected_airport_name:", ((selectedVehicle == 1) ? selectedAirportName.name : pickupInp), "destination_location:", ((selectedVehicle == 2) ? selectedAirportName.name : dropoffInp), "infantSeats:", String(infantSeats), "regularSeats:", String(regularSeats), "boosterSeats:", String(boosterSeats), "selected Location", data1, "luggage:", String(watchedLuggage), "Strop Over", String(watchedStopover), "Bike", String(watchedByke), "Children", childrenCount);
 
         fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/fare?` + params)
             .then(res => res.json())
