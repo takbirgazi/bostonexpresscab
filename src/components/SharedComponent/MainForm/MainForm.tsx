@@ -642,7 +642,7 @@ const MainForm = () => {
                                                 value={infantSeats}
                                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                                     setInfantSeats(Number(e.target.value));
-                                                    setShowAdditionalOptions(false);
+                                                    setShowAdditionalOptions(!(Number(regularSeats + boosterSeats + Number(e.target.value)) === Number(watch("childSeats"))));
                                                 }}
                                                 className="p-2 border border-gray-300 rounded-sm focus:outline-0"
                                             >
@@ -663,7 +663,7 @@ const MainForm = () => {
                                                 value={regularSeats}
                                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                                     setRegularSeats(Number(e.target.value));
-                                                    setShowAdditionalOptions(false);
+                                                    setShowAdditionalOptions(!(Number(infantSeats + boosterSeats + Number(e.target.value)) === Number(watch("childSeats"))));
                                                 }}
                                                 className="p-2 border border-gray-300 rounded-sm focus:outline-0"
                                             >
@@ -684,7 +684,8 @@ const MainForm = () => {
                                                 value={boosterSeats}
                                                 onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                                     setBoosterSeats(Number(e.target.value));
-                                                    setShowAdditionalOptions(false);
+                                                    // If seats match, hide options (return false), else keep open (return true)
+                                                    setShowAdditionalOptions(!(Number(infantSeats + regularSeats + Number(e.target.value)) === Number(watch("childSeats"))));
                                                 }}
                                                 className="p-2 border border-gray-300 rounded-sm focus:outline-0"
                                             >
