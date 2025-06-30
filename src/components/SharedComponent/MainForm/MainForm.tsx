@@ -73,6 +73,7 @@ const MainForm = () => {
     const [fareAfterDiscount, setFareAfterDiscount] = useState(0);
     const [extraChargeCity, setExtraChargeCity] = useState(0);
     const [extraTollOfCity, setExtraTollOfCity] = useState(0);
+    const [allowLuggage, setAllowLuggage] = useState(null);
 
     const dispatch = useAppDispatch();
 
@@ -241,7 +242,9 @@ const MainForm = () => {
         fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/fare?` + params)
             .then(res => res.json())
             .then(data => {
-                console.log('Total Fare:', data);
+                console.log('Total Fare:', (data.status == "error") ? data.luggageErrorMessage : data);
+                setAllowLuggage(data.status == "error" ? data.luggageErrorMessage : null);
+
                 if (distance === null || distance <= 0) {
                     setTotalFare(0);
                 } else {
@@ -289,6 +292,11 @@ const MainForm = () => {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         console.log(data.pickup)
+        if (allowLuggage !== null) {
+            toast.error(`${allowLuggage < 1 ? "You cant't carry Luggage" : "You can carry only " + allowLuggage + " Luggage(s)"}`);
+            setIsSubmitting(false);
+            return;
+        }
         if (Number(distance) > 0) {
             setIsSubmitting(true);
             try {
@@ -762,7 +770,7 @@ const MainForm = () => {
                     )}
                 </div>
                 <div className="flex justify-between items-end mt-4">
-                    <h2 className="font-bold text-xl font-poppins">Total: <span>${Math.round(totalFare)}</span></h2>
+                    <h2 className="font-bold text-xl font-poppins">Total: <span>${Math.round(totalFare) || 0}</span></h2>
                     <div className="flex flex-col items-end">
                         <p className="text-white text-xs px-3 md:text-sm font-lato font-bold bg-red-400 p-1 rounded">Get 10% Discount on cash payments</p>
                         <button

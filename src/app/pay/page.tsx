@@ -46,7 +46,7 @@ export default function PayPage() {
         script.onload = loadSquare;
         document.head.appendChild(script);
     }, []);
-console.log("load")
+    console.log("load")
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         if (!card) return;
@@ -57,7 +57,7 @@ console.log("load")
                 user,
                 nonce: result.token,
             };
-
+            console.log(result)
             const response = await fetch('http://your-laravel-domain.com/api/payment/process', {
                 method: 'POST',
                 headers: {
