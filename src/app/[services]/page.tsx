@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ services:
             absolute: data.meta_title || data.title,
         },
         description: data.meta_description,
+        robots: "index, follow",
         alternates: {
             canonical: `https://bostonexpresscab.com/${services}`,
         },

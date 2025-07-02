@@ -42,7 +42,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="robots" content="index, follow" />
         <meta name="google-site-verification" content="gzdoZuP-2-R_0mGQ4I8T2MKMftqqvqgspazPHTiKy1w" />
         {/* Google Tag Manager */}
         <Script id="gtm-init" strategy="afterInteractive">

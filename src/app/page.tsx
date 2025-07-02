@@ -17,6 +17,7 @@ export const metadata = {
   alternates: {
     canonical: 'https://bostonexpresscab.com/',
   },
+  robots: "index, follow",
 };
 
 export default function Home() {
