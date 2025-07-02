@@ -18,11 +18,14 @@ export async function generateMetadata({ params }: { params: Promise<{ services:
             absolute: data.meta_title || data.title,
         },
         description: data.meta_description,
+        alternates: {
+            canonical: `https://bostonexpresscab.com/${services}`,
+        },
         keywords: data.meta_tag?.split(" "),
         openGraph: {
             title: data.meta_title || data.title,
             description: data.meta_description,
-            url: `https://bostonexpresscab.com/${data.slug}`,
+            url: `https://bostonexpresscab.com/${services}`,
         },
         twitter: {
             card: "summary_large_image",
