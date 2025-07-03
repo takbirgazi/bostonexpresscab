@@ -545,9 +545,11 @@ const MainForm = () => {
                             {...register("luggage")}
                             className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
                         >
-                            {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(num => (
-                                <option key={num} value={num}>{num}</option>
-                            ))}
+                            {[0, 1, 2, 3]
+                                .concat((Number(watch("passengers")) + Number(watch("children"))) >= 4 ? (Number(watch("passengers")) + Number(watch("children")) == 7) ? [4, 5] : [4, 5, 6] : [4, 5, 6, 7, 8])
+                                .map(num => (
+                                    <option key={num} value={num}>{num}</option>
+                                ))}
                         </select>
                     </div>
                     <div className="flex flex-col gap-1 w-full md:w-1/2">
