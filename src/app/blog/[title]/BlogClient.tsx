@@ -124,7 +124,7 @@ export default function BlogClient({ route }: { route: string }) {
                             {recentPosts?.map((post) => (
                                 <li key={post.id}>
                                     <Link
-                                        href={`/blog/${post.id}`}
+                                        href={`/blog/${post.slug}`}
                                         className="text-indigo-600 hover:underline text-sm"
                                     >
                                         {post.title}
