@@ -545,7 +545,7 @@ const MainForm = () => {
                             {...register("luggage")}
                             className="w-full p-2 border border-gray-300 rounded-sm focus:outline-0"
                         >
-                            {[0, 1, 2, 3, 4, 5, 6].map(num => (
+                            {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(num => (
                                 <option key={num} value={num}>{num}</option>
                             ))}
                         </select>
