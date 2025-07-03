@@ -29,8 +29,14 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Boston Express Cab",
-  description: "Boston Airport",
+  title: {
+    default: "Boston Express Cab",
+    template: "%s - Boston Express Cab"
+  },
+  description: "Call Boston Carb at +16172306362 and book your affordable Logan Airport taxi/Boston car service and Boston cab service with child seats. We have been providing the most trusted and reliable taxi service in Boston, MA.",
+  twitter: {
+    card: "summary_large_image"
+  }
 };
 
 export default function RootLayout({

@@ -7,8 +7,9 @@ import Rents from "@/components/HomeComponents/Rents/Rents";
 import Reviews from "@/components/HomeComponents/Reviews/Reviews";
 import SpecializedFeatures from "@/components/HomeComponents/SpecializedFeatures/SpecializedFeatures";
 import 'aos/dist/aos.css';
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Boston Express Cab - Logan Airport Car & Taxi Service | Boston Taxi",
   description:
     "Call Boston Carb at +16172306362 and book your affordable Logan Airport taxi/Boston car service and Boston cab service with child seats. We have been providing the most trusted and reliable taxi service in Boston, MA.",

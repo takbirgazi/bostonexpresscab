@@ -12,11 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ services:
     const data = await res.json();
 
     return {
-        title: {
-            default: data.meta_title || data.title,
-            template: `%s | Boston Express Cab`,
-            absolute: data.meta_title || data.title,
-        },
+        title: data.meta_title,
         description: data.meta_description,
         robots: "index, follow",
         alternates: {
