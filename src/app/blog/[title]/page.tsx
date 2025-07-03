@@ -1,5 +1,17 @@
 import { Metadata } from "next";
 import BlogClient from "./BlogClient";
+import { BlogPostProps } from "../BlogPostPropsType";
+
+interface BlogType {
+    data: BlogPostProps[]
+}
+
+export async function generateStaticParams() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/all-blog`);
+    const { data }: BlogType = await res.json();
+
+    return data.map(({ slug }) => ({ title: slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ title: string }> }): Promise<Metadata> {
     const { title } = await params;

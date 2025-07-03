@@ -4,21 +4,14 @@ import PageHeader from '@/components/SharedComponent/PageHeader/PageHeader';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { BlogPostProps } from '../BlogPostPropsType';
 
-interface BlogPost {
-    id: number;
-    title: string;
-    slug: string;
-    photo: string;
-    description: string;
-    created_at: string;
-}
 
 export default function BlogClient({ route }: { route: string }) {
     const slug = route; // get the last part of the path
 
-    const [blog, setBlog] = useState<BlogPost | null>(null);
-    const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
+    const [blog, setBlog] = useState<BlogPostProps | null>(null);
+    const [recentPosts, setRecentPosts] = useState<BlogPostProps[]>([]);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
 

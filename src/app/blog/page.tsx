@@ -5,18 +5,7 @@ import PageHeader from '@/components/SharedComponent/PageHeader/PageHeader';
 import pageHeaderBg from "@/assets/images/pageHeadearBg.jpg";
 import Image from 'next/image';
 import loadingImage from "@/assets/images/loading2.gif";
-
-interface BlogPostProps {
-    id: number;
-    title: string;
-    slug: string;
-    photo: string;
-    description: string;
-    created_at: string;
-    meta_title?: string;
-    meta_tag?: string;
-    meta_description?: string;
-}
+import { BlogPostProps } from './BlogPostPropsType';
 
 interface BlogApiResponse {
     current_page: number;

@@ -1,6 +1,16 @@
 import ServiceClient from "./ServiceClient";
 import { Metadata } from "next";
 
+interface ServiceType {
+    slug: string
+}
+
+export async function generateStaticParams() {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/service-posts`);
+    const data: ServiceType[] = await res.json();
+    return data.map(({ slug }) => ({ services: slug }));
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ services: string }> }): Promise<Metadata> {
     const { services } = await params;
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/service-posts/${services}`, {
