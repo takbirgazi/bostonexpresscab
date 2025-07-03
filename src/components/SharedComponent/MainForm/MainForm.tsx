@@ -13,8 +13,6 @@ import SelectOption from "./SelectOption/SelectOption";
 import toast from 'react-hot-toast';
 import LocationSearch from "./LocationSearch/LocationSearch";
 import { calculateDistance } from "@/app/utils/calculateDistance";
-import { useAppDispatch } from "@/lib/hooks";
-import { setFrom } from "@/lib/features/formdata/formdataSlice";
 import { AirportList, Inputs, PlaceSelectHandler } from "./MainFromTypes";
 import CustomDatePicker from "./CustomDatePicker/CustomDatePicker";
 
@@ -74,8 +72,6 @@ const MainForm = () => {
     const [extraChargeCity, setExtraChargeCity] = useState(0);
     const [extraTollOfCity, setExtraTollOfCity] = useState(0);
     const [allowLuggage, setAllowLuggage] = useState(null);
-
-    const dispatch = useAppDispatch();
 
     const {
         register,
@@ -370,7 +366,8 @@ const MainForm = () => {
 
                 // Assuming the API returns an ID in the response
                 if (result.data.uuid) {
-                    dispatch(setFrom(result.data.uuid));
+                    // dispatch(setFrom(result.data.uuid));
+                    localStorage.setItem("currentUser", result.data.uuid);
                     router.push(`/add-to-cart`);
                 } else {
                     console.error("No ID received in response");

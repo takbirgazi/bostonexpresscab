@@ -1,13 +1,18 @@
 "use client"
-import { useAppSelector } from '@/lib/hooks';
 import Link from 'next/link';
-// import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function ThankYouPage() {
+    const [route, setRoute] = useState<string | null>(null);
+    const uuid = route;
+    // Set route from localStorage on client side
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const currentUser = localStorage.getItem("currentUser");
+            setRoute(currentUser);
+        }
+    }, []);
 
-    const fromData = useAppSelector(state => state.formData);
-    const uuid = fromData.usrId;
-    // const [invoice, setInvoice] = useState("")
     console.log(uuid)
 
     const handleDownload = async () => {

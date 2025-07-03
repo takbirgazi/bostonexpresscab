@@ -12,15 +12,13 @@ import {
   FaPhone,
   FaEnvelope,
 } from 'react-icons/fa';
-import { useAppSelector } from '@/lib/hooks';
 
 
 export default function BookingSummaryPage() {
-  const fromData = useAppSelector(state => state.formData);
   const [isTraveler, setIsTraveler] = useState(true);
-  const route = fromData.usrId;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [rentCars, setRentCars] = useState([]);
+  const [route, setRoute] = useState<string | null>(null);
   const [bookingData, setBookingData] = useState<BookingTypes>({
     uuid: '',
     date: '',
@@ -67,7 +65,7 @@ export default function BookingSummaryPage() {
   })
 
   const [formData, setFormData] = useState({
-    uuid: route.startsWith('/') ? route.slice(2) : route,
+    uuid: "",
     travel_detail_id: 1,
     passenger_name: '',
     email: '',
@@ -78,6 +76,18 @@ export default function BookingSummaryPage() {
     mailing_address: '',
     special_needs: ''
   });
+
+  // Set route from localStorage on client side
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const currentUser = localStorage.getItem("currentUser");
+      setRoute(currentUser);
+      setFormData(prev => ({
+        ...prev,
+        uuid: currentUser || ""
+      }));
+    }
+  }, []);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_BASE_API_2}/cars`)
@@ -129,7 +139,7 @@ export default function BookingSummaryPage() {
       const data = await response.json();
       console.log(data)
       // setIsModalOpen(true);
-      window.location.href = `${process.env.NEXT_PUBLIC_PAYMENT_API}?user=${route.startsWith('/') ? route.slice(2) : route}` as string;
+      window.location.href = `${process.env.NEXT_PUBLIC_PAYMENT_API}?user=${route}` as string;
     } catch (error) {
       console.error('Error submitting form:', error);
       toast.error('Please try again');

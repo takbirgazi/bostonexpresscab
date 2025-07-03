@@ -5,7 +5,6 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import SmoothScrollWrapper from "./SmoothScrollWrapper";
 import { Toaster } from "react-hot-toast";
-import StoreProvider from "./StoreProvider";
 import Script from "next/script";
 
 const outfit = Outfit({
@@ -72,9 +71,7 @@ export default function RootLayout({
         */}
         <Header />
         <SmoothScrollWrapper>
-          <StoreProvider>
-            {children}
-          </StoreProvider>
+          {children}
         </SmoothScrollWrapper>
         <Footer />
         <Toaster />
